@@ -18,6 +18,7 @@ private val logger = KotlinLogging.logger {}.initKtLintKLogger()
  * rules are executed, a singleton instance of the class is used to prevent that the logs are flooded with duplicate
  * log lines.
  */
+//*DARIO* initialize a file scan
 private val ruleRunnerSorter = RuleRunnerSorter()
 
 internal class VisitorProvider(

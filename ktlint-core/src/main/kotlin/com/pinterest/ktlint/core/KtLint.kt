@@ -79,6 +79,7 @@ public object KtLint {
      * Enables some internals workarounds for Kotlin Compiler initialization.
      * Usually you don't need to use it and most probably it will be removed in one of next versions.
      */
+    //*DARIO* parameters for invoking the linter
     public data class ExperimentalParams(
         val fileName: String? = null,
         val text: String,
@@ -88,7 +89,9 @@ public object KtLint {
         )
         val ruleSets: Iterable<RuleSet> = Iterable { emptySet<RuleSet>().iterator() },
         val ruleProviders: Set<RuleProvider> = emptySet(),
+        // *DARIO* user data can be used to provide extra parameters to the rule
         val userData: Map<String, String> = emptyMap(), // TODO: remove in a future version
+        // *DARIO* this is callback that is triggered and a rule test fails
         val cb: (e: LintError, corrected: Boolean) -> Unit,
         val script: Boolean = false,
         @Deprecated("Marked for removal in KtLint 0.48. Use 'editorConfigDefaults' to specify default property values")
@@ -177,6 +180,7 @@ public object KtLint {
      * @throws ParseException if text is not a valid Kotlin code
      * @throws RuleExecutionException in case of internal failure caused by a bug in rule implementation
      */
+    //*MAIN* *DARIO* this the main entry point for the lint process (public fun lint)
     public fun lint(params: ExperimentalParams) {
         val ruleExecutionContext = createRuleExecutionContext(params)
         val errors = mutableListOf<LintError>()
@@ -195,18 +199,21 @@ public object KtLint {
             .forEach { e -> params.cb(e, false) }
     }
 
+    // *DARIO* when we get here the AST tree has been already generated
     private fun RuleExecutionContext.executeRule(
         rule: Rule,
         fqRuleId: String,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
-        rule.startTraversalOfAST()
+        //*DARIO* this is the core: the AST traversal
+        rule.startTraversalOfAST() //*DARIO* set the state of execution
         rule.beforeFirstNode(editorConfigProperties)
         this.executeRuleOnNodeRecursively(rootNode, rule, fqRuleId, autoCorrect, emit)
         rule.afterLastNode()
     }
 
+    //*DARIO* traverse all the ASTNode children
     private fun RuleExecutionContext.executeRuleOnNodeRecursively(
         node: ASTNode,
         rule: Rule,
@@ -218,9 +225,14 @@ public object KtLint {
          * The [RuleExecutionContext.suppressionLocator] can be changed during each visit of node when running
          * [KtLint.format]. So a new handler is to be built before visiting the nodes.
          */
+        // *DARIO* the SuppressHandler is to decide if a rule in a certain postion should be suppressed
+        // so we call a rule on a node as it is wrapped by a suppressHandler that know if that "emit" calls
+        // in the rules should be suppressed or not
         val suppressHandler = SuppressHandler(suppressionLocator, rootNode, autoCorrect, emit)
+        // *DARIO* is possible to abort ast traversal if traversalState != TraversalState.CONTINUE
         if (rule.shouldContinueTraversalOfAST()) {
             try {
+                //*DARIO* wrap call to rule.beforeVisitChildNodes in suppressHandler
                 suppressHandler.handle(node, fqRuleId) { autoCorrect, emit ->
                     rule.beforeVisitChildNodes(node, autoCorrect, emit)
                 }
@@ -239,6 +251,7 @@ public object KtLint {
                             }
                         }
                 }
+                //*DARIO* wrap call to rule.afterVisitChildNodes in suppressHandler
                 suppressHandler.handle(node, fqRuleId) { autoCorrect, emit ->
                     rule.afterVisitChildNodes(node, autoCorrect, emit)
                 }
@@ -261,18 +274,20 @@ public object KtLint {
      * @throws ParseException if text is not a valid Kotlin code
      * @throws RuleExecutionException in case of internal failure caused by a bug in rule implementation
      */
+    // *MAIN* *DARIO* apparently this returns the code reformatted (public fun format)
     public fun format(params: ExperimentalParams): String {
         val hasUTF8BOM = params.text.startsWith(UTF8_BOM)
+        // *DARIO* createRuleExecutionContext will parse the kotlin code and return the AST tree
         val ruleExecutionContext = createRuleExecutionContext(params)
 
-        var tripped = false
-        var mutated = false
+        var tripped = false // *DARIO* todo understand what is this flag for? apparently is set when at lease one emit message is output
+        var mutated = false // *DARIO* todo understand what is this flag for? apparently this is set
         val errors = mutableSetOf<Pair<LintError, Boolean>>()
         val visitorProvider = VisitorProvider(params = params)
         visitorProvider
-            .visitor(ruleExecutionContext.editorConfigProperties)
+            .visitor(ruleExecutionContext.editorConfigProperties) // *DARIO* will loop over all rules and execute them (AST tree scan for each of them)
             .invoke { rule, fqRuleId ->
-                ruleExecutionContext.executeRule(rule, fqRuleId, true) { offset, errorMessage, canBeAutoCorrected ->
+                ruleExecutionContext.executeRule(rule, fqRuleId, true) { offset, errorMessage, canBeAutoCorrected -> //*DARIO* this is the "emit" parameter, called if the rule was triggered
                     tripped = true
                     if (canBeAutoCorrected) {
                         mutated = true
@@ -293,7 +308,7 @@ public object KtLint {
                     )
                 }
             }
-        if (tripped) {
+        if (tripped) { //*DARIO* todo what is this?
             visitorProvider
                 .visitor(ruleExecutionContext.editorConfigProperties)
                 .invoke { rule, fqRuleId ->
@@ -319,6 +334,8 @@ public object KtLint {
             return params.text
         }
 
+        // *DARIO* the root node here contains the updated AST tree, and we extract from it the updated source code
+        //         after all rules where run
         val code = ruleExecutionContext
             .rootNode
             .text

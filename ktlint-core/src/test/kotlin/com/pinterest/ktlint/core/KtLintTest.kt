@@ -625,6 +625,7 @@ class KtLintTest {
 
             @Test
             fun `Given a rule returning an errors which can and can not be autocorrected than that state of the error can be retrieved in the callback`() {
+                // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
                 val code =
                     """
                     val foo = "${AutoCorrectErrorRule.STRING_VALUE_NOT_TO_BE_CORRECTED}"
@@ -1652,6 +1653,7 @@ private fun getResourceAsText(path: String) =
         .bufferedReader()
         .readText()
 
+// *DARIO* this for collecting result of a lint of peration
 private data class CallbackResult(
     val line: Int,
     val col: Int,

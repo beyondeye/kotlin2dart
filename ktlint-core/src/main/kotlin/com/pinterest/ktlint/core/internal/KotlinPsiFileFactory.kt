@@ -44,6 +44,7 @@ internal fun initPsiFileFactory(isFromCli: Boolean): PsiFileFactory {
 
     val compilerConfiguration = CompilerConfiguration()
     compilerConfiguration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+    // *DARIO* this the only usage of the isFromCli parameter
     // Special workaround on JDK 1.8 when KtLint is used from shipped CLI
     // to prevent Kotlin compiler initialization error
     if (isFromCli && System.getProperty("java.specification.version") == "1.8") {

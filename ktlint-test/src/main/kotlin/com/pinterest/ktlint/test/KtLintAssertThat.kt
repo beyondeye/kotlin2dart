@@ -30,6 +30,8 @@ import org.junit.jupiter.api.assertAll
  * }
  * ```
  */
+//*DARIO* I can use KtLintAssertThat as a hook to run my code?
+//        or at least look at the code here how to run the compile on a specific file
 @Suppress("MemberVisibilityCanBePrivate")
 public class KtLintAssertThat(
     /**

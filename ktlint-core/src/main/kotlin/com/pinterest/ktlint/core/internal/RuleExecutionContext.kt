@@ -28,6 +28,7 @@ internal class RuleExecutionContext(
     }
 }
 
+// *DARIO* call the kotlin compiler and parse code and create the AST tree
 internal fun createRuleExecutionContext(params: KtLint.ExperimentalParams): RuleExecutionContext {
     val psiFileFactory = kotlinPsiFileFactoryProvider.getKotlinPsiFileFactory(params.isInvokedFromCli)
     val normalizedText = normalizeText(params.text)

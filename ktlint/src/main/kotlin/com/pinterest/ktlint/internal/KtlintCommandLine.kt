@@ -91,6 +91,7 @@ Flags:
     mixinStandardHelpOptions = true,
     versionProvider = KtlintVersionProvider::class,
 )
+// *DARIO* command line options for Ktlint
 internal class KtlintCommandLine {
 
     @CommandLine.Spec
@@ -425,6 +426,7 @@ internal class KtlintCommandLine {
         val result = ArrayList<LintErrorWithCorrectionInfo>()
         if (format) {
             val formattedFileContent = try {
+                // *DARIO* call the formatFile from CLI
                 formatFile(
                     fileName,
                     fileContent,

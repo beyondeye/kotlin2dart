@@ -342,4 +342,7 @@ public object DefaultEditorConfigProperties : UsesEditorConfigProperties {
 /**
  * Loaded [Property]s from `.editorconfig` files.
  */
+// *DARIO* see https://github.com/ec4j/ec4j (Java EditorConfig Parser)
+//         see also https://editorconfig.org/.
+//         editor config properties basically define formatting style mainly related to white spaces/tab size/ and so on
 public typealias EditorConfigProperties = Map<String, Property>

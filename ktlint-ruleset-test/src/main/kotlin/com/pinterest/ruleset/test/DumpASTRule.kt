@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 import org.jetbrains.kotlin.lexer.KtTokens
 
+// *MAIN* *DARIO* this is probably the simplest rule that can be written that simply print the AST node .DumpASTRule very useful to test ast before converting
 public class DumpASTRule @JvmOverloads constructor(
     private val out: PrintStream = System.err,
     private val color: Boolean = false,

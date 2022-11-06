@@ -380,6 +380,7 @@ internal fun lintFile(
 /**
  * Format a kotlin file or script file
  */
+// *MAIN* *DARIO* entry point for formatting file from cli! (fun formatFile()
 internal fun formatFile(
     fileName: String,
     fileContents: String,

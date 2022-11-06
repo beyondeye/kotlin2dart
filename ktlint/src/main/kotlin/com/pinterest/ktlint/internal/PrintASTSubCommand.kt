@@ -24,6 +24,7 @@ private val logger = KotlinLogging.logger {}.initKtLintKLogger()
     mixinStandardHelpOptions = true,
     versionProvider = KtlintVersionProvider::class,
 )
+// *MAIN* *DARIO* todo refactor code here to a test
 internal class PrintASTSubCommand : Runnable {
     @CommandLine.ParentCommand
     private lateinit var ktlintCommand: KtlintCommandLine
@@ -57,6 +58,8 @@ internal class PrintASTSubCommand : Runnable {
         }
     }
 
+    // *DARIO* this is the simplest possible processing that simply print the AST code tree
+    // it can be helpful to look at implementation of DumpASTRule
     private fun printAST(
         fileName: String,
         fileContent: String,

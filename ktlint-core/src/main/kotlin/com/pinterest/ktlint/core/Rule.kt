@@ -12,6 +12,10 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
  * that each call to [RuleProvider.createNewRuleInstance] indeed creates a new instance. The KtLint engine never
  * re-uses a [Rule] instance once is has been used for traversal of the AST of a file.
  */
+// *DARIO* Rule is the base class of operates on an Ast tree, for example DumpASTRule
+// *DARIO* note that ASTNode is not the sane class as  KtElement that is used in the Visitor used in Detekt: ASTNode is more
+//          low level. but each KtElement can be created from a ASTNode by simply passing the node as argument to the constructor
+//          so the code AST visiting done in detekt is equivalent to that is done in ktlint
 public open class Rule(
     /**
      * Identification of the rule. Except for rules in the "standard" rule set, this id needs to be prefixed with the
@@ -155,6 +159,8 @@ public open class Rule(
         STOP,
     }
 
+    // *DARIO* VisitorModifier are properties of Rules that define order of execution between rules and dependencies
+    //         between rules
     public sealed class VisitorModifier {
 
         public data class RunAfterRule(

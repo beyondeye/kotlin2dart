@@ -75,6 +75,7 @@ public fun Set<RuleProvider>.lint(
         cb = { lintError, _ -> lintErrors.add(lintError) },
         debug = true,
     )
+    //*DARIO* run the linter
     KtLint.lint(experimentalParams)
     return lintErrors
 }

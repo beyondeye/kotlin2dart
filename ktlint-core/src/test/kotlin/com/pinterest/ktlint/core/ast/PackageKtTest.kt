@@ -460,6 +460,8 @@ class PackageKtTest {
         transformCodeToAST(this)
             .apply(block)
 
+    // *DARIO* low level method that configure all parameter to just parse the kotlin code Ast
+    // in this file are basic test of kotlin AST manipulation
     private fun transformCodeToAST(code: String) =
         createRuleExecutionContext(
             KtLint.ExperimentalParams(
