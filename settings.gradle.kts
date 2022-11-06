@@ -43,6 +43,7 @@ include(
     ":ktlint-ruleset-standard",
     ":ktlint-ruleset-template",
     ":ktlint-ruleset-test",
+    ":ktlint-ruleset-k2dart",
     ":ktlint-test",
     ":ktlint-test-logging",
 )
