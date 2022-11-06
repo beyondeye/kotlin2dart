@@ -16,6 +16,6 @@ public class CustomRuleSetProvider :
     ) {
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
-            RuleProvider { NoVarRule() },
+            RuleProvider { FinalInsteadOfValRule() },
         )
 }

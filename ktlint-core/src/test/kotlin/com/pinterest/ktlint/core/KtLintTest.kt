@@ -1648,6 +1648,7 @@ private val ASTNode.visitNodeType: RuleExecutionCall.VisitNodeType
             CHILD
         }
 
+//*DARIO* for test: get some text resource file as text
 private fun getResourceAsText(path: String) =
     (ClassLoader.getSystemClassLoader().getResourceAsStream(path) ?: throw RuntimeException("$path not found"))
         .bufferedReader()

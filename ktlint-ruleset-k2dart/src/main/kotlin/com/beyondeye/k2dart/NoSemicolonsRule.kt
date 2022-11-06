@@ -26,6 +26,8 @@ import org.jetbrains.kotlin.psi.KtIfExpression
 import org.jetbrains.kotlin.psi.KtLoopExpression
 import org.jetbrains.kotlin.psi.psiUtil.getStrictParentOfType
 
+//*DARIO* TODO the purpose of having this rule here is to adapt it to actually
+//        require semicolumns at the end of statements!
 public class NoSemicolonsRule : Rule("no-semi") {
 
     override fun beforeVisitChildNodes(
