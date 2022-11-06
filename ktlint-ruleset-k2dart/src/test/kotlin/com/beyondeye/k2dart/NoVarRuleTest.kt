@@ -12,7 +12,7 @@ class NoVarRuleTest {
         // com.pinterest.ktlint.test.(lint|format) will print AST (along with other debug info) to the stderr.
         // this can be extremely helpful while writing and testing rules.
         // uncomment the line below to take a quick look at it
-        // System.setProperty("ktlintDebug", "ast")
+        System.setProperty("ktlintDebug", "ast")
         val code =
             """
             fun fn() {
