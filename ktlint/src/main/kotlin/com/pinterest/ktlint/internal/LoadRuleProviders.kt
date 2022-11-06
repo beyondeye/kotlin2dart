@@ -32,8 +32,11 @@ internal fun JarFiles.loadRuleProviders(
         .map { getRuleProvidersFromJar(it, debug) }
         .flatMap { rulesProvidersFromJar ->
             // Remove disabled rule sets
+            // *DARIO* rulesProvidersFromJar is a map where the key is rulesProvidersFromJar.id as defined in class CustomRuleSetProvider
+            //         the ktlint.jar is scanned for all linked library containing classes deriving from RuleSetProviderV2
+            //         and all rules defined there are automatically included (if not filtered out here)
             rulesProvidersFromJar
-                .filterKeys { loadExperimental || it != "experimental" }
+                .filterKeys { loadExperimental || it != "experimental" } //*DARIO* todo we don't use this flag
                 .filterKeys { !(disabledRules.isStandardRuleSetDisabled() && it == "standard") }
                 .values
         }

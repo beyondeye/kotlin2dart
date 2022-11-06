@@ -28,8 +28,11 @@ dependencies {
     implementation(projects.ktlintReporterHtml)
     implementation(projects.ktlintReporterPlain)
     implementation(projects.ktlintReporterSarif)
-    implementation(projects.ktlintRulesetExperimental)
-    implementation(projects.ktlintRulesetStandard)
+    // *DARIO* disable ktlint rules: we don't need them
+//    implementation(projects.ktlintRulesetExperimental)
+    // *DARIO* disable ktlint rules: we don't need them
+//    implementation(projects.ktlintRulesetStandard)
+    implementation(projects.ktlintRulesetK2dart)
     implementation(projects.ktlintRulesetTest)
     implementation(libs.kotlin.compiler)
     implementation(libs.klob)

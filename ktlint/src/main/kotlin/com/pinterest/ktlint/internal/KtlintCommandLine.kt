@@ -91,7 +91,8 @@ Flags:
     mixinStandardHelpOptions = true,
     versionProvider = KtlintVersionProvider::class,
 )
-// *DARIO* command line options for Ktlint
+// *DARIO* command line options for Ktlint are defined here
+//  TODO remove here options that are not relevant for kotlin2dart
 internal class KtlintCommandLine {
 
     @CommandLine.Spec
