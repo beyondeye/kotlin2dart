@@ -5,3 +5,4 @@ build
 /.idea
 *.iml
 out
+/k2dart-executables/k2dart.jar
