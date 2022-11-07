@@ -1,5 +1,6 @@
 package com.beyondeye.k2dart
 
+import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
 import com.pinterest.ktlint.core.RuleProvider
 import com.pinterest.ktlint.core.RuleSetProviderV2
 

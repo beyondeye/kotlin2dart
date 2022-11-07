@@ -1,29 +1,13 @@
-package com.beyondeye.k2dart
+package com.beyondeye.k2dart.unused
 
 import com.pinterest.ktlint.core.Rule
-import com.pinterest.ktlint.core.ast.ElementType.KDOC_TEXT
-import com.pinterest.ktlint.core.ast.ElementType.OBJECT_KEYWORD
-import com.pinterest.ktlint.core.ast.ElementType.SEMICOLON
-import com.pinterest.ktlint.core.ast.isPartOf
-import com.pinterest.ktlint.core.ast.isPartOfComment
-import com.pinterest.ktlint.core.ast.isPartOfString
-import com.pinterest.ktlint.core.ast.isWhiteSpace
-import com.pinterest.ktlint.core.ast.nextLeaf
-import com.pinterest.ktlint.core.ast.prevCodeLeaf
-import com.pinterest.ktlint.core.ast.prevLeaf
-import com.pinterest.ktlint.core.ast.upsertWhitespaceAfterMe
+import com.pinterest.ktlint.core.ast.*
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.PsiComment
 import org.jetbrains.kotlin.com.intellij.psi.PsiWhiteSpace
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtAnnotationEntry
-import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.KtClassBody
-import org.jetbrains.kotlin.psi.KtDoWhileExpression
-import org.jetbrains.kotlin.psi.KtEnumEntry
-import org.jetbrains.kotlin.psi.KtIfExpression
-import org.jetbrains.kotlin.psi.KtLoopExpression
+import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.getStrictParentOfType
 
 //*DARIO* TODO the purpose of having this rule here is to adapt it to actually
@@ -35,10 +19,10 @@ public class NoSemicolonsRule : Rule("no-semi") {
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
-        if (node.elementType == KDOC_TEXT) {
+        if (node.elementType == ElementType.KDOC_TEXT) {
             return
         }
-        if (node.elementType == SEMICOLON &&
+        if (node.elementType == ElementType.SEMICOLON &&
             !node.isPartOfString() &&
             !node.isPartOfEnumEntry()
         ) {
@@ -79,7 +63,7 @@ public class NoSemicolonsRule : Rule("no-semi") {
     }
 
     private fun doesNotRequirePostSemi(prevLeaf: ASTNode?): Boolean {
-        if (prevLeaf?.elementType == OBJECT_KEYWORD) {
+        if (prevLeaf?.elementType == ElementType.OBJECT_KEYWORD) {
             // https://github.com/pinterest/ktlint/issues/281
             return false
         }
