@@ -6,9 +6,8 @@ import com.pinterest.ktlint.core.KtLint
 import com.pinterest.ktlint.core.RuleSet
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-// *DARIO* this for collecting result of a lint of operation
 
-class NoValRuleTest {
+class BasicTypeNamesRuleTest {
     @Test
     fun `change val keyword to final keyword`() {
         // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
