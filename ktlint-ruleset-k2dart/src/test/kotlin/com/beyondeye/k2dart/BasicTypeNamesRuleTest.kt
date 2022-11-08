@@ -1,10 +1,7 @@
 package com.beyondeye.k2dart
 
 import com.beyondeye.k2dart.rules.BasicTypesNamesRule
-import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
-import com.beyondeye.k2dart.testutils.CallbackResult
-import com.pinterest.ktlint.core.KtLint
-import com.pinterest.ktlint.core.RuleSet
+import com.pinterest.ktlint.core.Rule
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -32,35 +29,11 @@ class BasicTypeNamesRuleTest {
                 val b:bool = true
             }
             """.trimIndent()
-        val callbacks = mutableListOf<CallbackResult>()
-        val actualFormattedCode = KtLint.format(
-            KtLint.ExperimentalParams(
-                text = code,
-                ruleSets = listOf(
-                    RuleSet("kotlin-to-dart", BasicTypesNamesRule()),
-                ),
-                userData = emptyMap(),
-                cb = { e, corrected ->
-                    /*
-                    callbacks.add(
-                        CallbackResult(
-                            line = e.line,
-                            col = e.col,
-                            ruleId = e.ruleId,
-                            detail = e.detail,
-                            canBeAutoCorrected = e.canBeAutoCorrected,
-                            corrected = corrected,
-                        ),
-                    )
-                     */
-                },
-                script = false,
-                editorConfigPath = null,
-                debug = false,
-            ),
-        )
+        val rulesToTest= listOf<Rule>(BasicTypesNamesRule())
+        val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
     }
 
 
 }
+

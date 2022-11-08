@@ -25,32 +25,7 @@ class NoValRuleTest {
             }
             """.trimIndent()
         val callbacks = mutableListOf<CallbackResult>()
-        val actualFormattedCode = KtLint.format(
-            KtLint.ExperimentalParams(
-                text = code,
-                ruleSets = listOf(
-                    RuleSet("kotlin-to-dart", FinalInsteadOfValRule()),
-                ),
-                userData = emptyMap(),
-                cb = { e, corrected ->
-                    /*
-                    callbacks.add(
-                        CallbackResult(
-                            line = e.line,
-                            col = e.col,
-                            ruleId = e.ruleId,
-                            detail = e.detail,
-                            canBeAutoCorrected = e.canBeAutoCorrected,
-                            corrected = corrected,
-                        ),
-                    )
-                     */
-                },
-                script = false,
-                editorConfigPath = null,
-                debug = false,
-            ),
-        )
+        val actualFormattedCode = runRulesOnCodeFragment(code, listOf(FinalInsteadOfValRule()))
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
         /*
         Assertions.assertThat(callbacks).containsExactly(
