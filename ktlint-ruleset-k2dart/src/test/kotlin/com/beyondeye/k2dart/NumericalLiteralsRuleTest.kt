@@ -1,35 +1,32 @@
 package com.beyondeye.k2dart
 
-import com.beyondeye.k2dart.rules.BasicTypesNamesRule
 import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
+import com.beyondeye.k2dart.rules.NumericalLiteralsRule
 import com.beyondeye.k2dart.testutils.CallbackResult
 import com.pinterest.ktlint.core.KtLint
 import com.pinterest.ktlint.core.RuleSet
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+// *DARIO* this for collecting result of a lint of operation
 
-class BasicTypeNamesRuleTest {
+class NumericalLiteralsRuleTest {
     @Test
-    fun `change basic type names`() {
+    fun `remove f F suffix in float literals and L l from long literals`() {
+        var f:Float = 1f
+        val l:Long = 2L
         // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
         val code =
             """
-            fun main(arg1:Double, arg2:Float) {
-                var d:Double = 1.0
+             fun fn() {
                 var f:Float = 1f
-                val i:Int = 1
-                val l:Long= 2L
-                val b:Boolean = true
+                val l:Long = 2L
             }
             """.trimIndent()
         val formattedCode =
             """
-            fun main(arg1:double, arg2:double) {
-                var d:double = 1.0
-                var f:double = 1f
-                val i:int = 1
-                val l:int= 2L
-                val b:bool = true
+             fun fn() {
+                var f:Float = 1.0
+                val l:Long = 2
             }
             """.trimIndent()
         val callbacks = mutableListOf<CallbackResult>()
@@ -37,7 +34,7 @@ class BasicTypeNamesRuleTest {
             KtLint.ExperimentalParams(
                 text = code,
                 ruleSets = listOf(
-                    RuleSet("kotlin-to-dart", BasicTypesNamesRule()),
+                    RuleSet("kotlin-to-dart",NumericalLiteralsRule()),
                 ),
                 userData = emptyMap(),
                 cb = { e, corrected ->
