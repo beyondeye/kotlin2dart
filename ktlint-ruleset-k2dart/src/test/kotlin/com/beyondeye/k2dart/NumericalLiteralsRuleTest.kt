@@ -12,9 +12,7 @@ import org.junit.jupiter.api.Test
 class NumericalLiteralsRuleTest {
     @Test
     fun `remove f F suffix in float literals and L l from long literals`() {
-        var f:Float = 1f
         val l:Long = 2L
-        // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
         val code =
             """
              fun fn() {
@@ -22,10 +20,11 @@ class NumericalLiteralsRuleTest {
                 val l:Long = 2L
             }
             """.trimIndent()
+        //NOTE: DART accept definition of float variables also using an integer literals
         val formattedCode =
             """
              fun fn() {
-                var f:Float = 1.0
+                var f:Float = 1
                 val l:Long = 2
             }
             """.trimIndent()

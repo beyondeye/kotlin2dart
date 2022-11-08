@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test
 class BasicTypeNamesRuleTest {
     @Test
     fun `change basic type names`() {
-        // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
         val code =
             """
             fun main(arg1:Double, arg2:Float) {

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test
 class NoValRuleTest {
     @Test
     fun `change val keyword to final keyword`() {
-        // *NAIN* *DARIO*  this is a test that run the KTlint.format look at it to check how it works
         val code =
             """
              fun fn() {
