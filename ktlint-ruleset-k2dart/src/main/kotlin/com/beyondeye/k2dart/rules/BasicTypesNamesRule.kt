@@ -8,8 +8,11 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 
 //
-public class BasicTypesNamesRule : Rule("basic-types-names") {
+public class BasicTypesNamesRule : Rule(ruleName) {
+    public companion object {
+        public const val ruleName:String="basic-types-names"
 
+    }
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
@@ -38,7 +41,7 @@ public class BasicTypesNamesRule : Rule("basic-types-names") {
         newIdentifier?.let {
             //*DARIO* important: need also to call emit, that log that we identified something to change in the code
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
-            emit(node.startOffset, "final_no_val", true)
+            emit(node.startOffset, ruleName, true)
             val newIdentifierNode = identifierNode.replaceWithText(newIdentifier)
             newIdentifierNode.asDartNode()
         }
