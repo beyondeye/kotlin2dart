@@ -5,8 +5,9 @@ import com.beyondeye.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
-import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 
+//
 public class BasicTypesNamesRule : Rule("basic-types-names") {
 
     override fun beforeVisitChildNodes(
@@ -14,13 +15,33 @@ public class BasicTypesNamesRule : Rule("basic-types-names") {
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
-        if(node.isDartNode()) return
-        if (node.elementType == ElementType.VAR_KEYWORD) {
+        if (node.isDartNode()) return
+        //~.psi.KtTypeReference (TYPE_REFERENCE)
+        //1:               ~.psi.KtUserType (USER_TYPE)
+        //1:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+        //1:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Float"
+        if (node.elementType != ElementType.TYPE_REFERENCE) return
+        val identifierNode: ASTNode? = node.firstChildNode.firstChildNode.firstChildNode
+        if (identifierNode?.isDartNode() != false) return
+        if (identifierNode.elementType != ElementType.IDENTIFIER) return
+        identifierNode as LeafPsiElement
+        val identifier = identifierNode.text
+        val newIdentifier: String? =
+            when (identifier) {
+                "Float" -> "double"
+                "Double" -> "double"
+                "Int" -> "int"
+                "Long" -> "int"
+                "Boolean" -> "bool"
+                else -> null
+            }
+        newIdentifier?.let {
             //*DARIO* important: need also to call emit, that log that we identified something to change in the code
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
             emit(node.startOffset, "final_no_val", true)
-            val newNode=(node as LeafElement).replaceWithText("final")
-            newNode.asDartNode()
+            val newIdentifierNode = identifierNode.replaceWithText(newIdentifier)
+            newIdentifierNode.asDartNode()
         }
     }
 }
+
