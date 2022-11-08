@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 public class NumericalLiteralsRule : Rule(ruleName) {
     public companion object {
         public const val ruleName:String="numerica-literals"
-
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,

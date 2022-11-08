@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 public class FinalInsteadOfValRule : Rule(ruleName) {
     public companion object {
         public const val ruleName:String="final-instead-of-val"
-
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,

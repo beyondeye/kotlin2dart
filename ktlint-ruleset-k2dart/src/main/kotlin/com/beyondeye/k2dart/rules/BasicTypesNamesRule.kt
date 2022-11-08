@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 public class BasicTypesNamesRule : Rule(ruleName) {
     public companion object {
         public const val ruleName:String="basic-types-names"
-
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,
