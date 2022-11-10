@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class SemicolonAtEndOfStatementsTest {
     @Test
-    fun `change basic type names`() {
+    fun `add semicolons where needed`() {
         val code =
             """
             |fun main() {

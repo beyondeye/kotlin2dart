@@ -38,12 +38,7 @@ public class SemicolonAtEndOfStatementsRule : Rule(ruleName) {
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
             emit(node.startOffset, NumericalLiteralsRule.ruleName, true)
             node.upsertSemicolonAfterMe()
-            //node.asDartNode()
         }
-        //~.psi.KtTypeReference (TYPE_REFERENCE)
-        //1:               ~.psi.KtUserType (USER_TYPE)
-        //1:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-        //1:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Float"
     }
 }
 
