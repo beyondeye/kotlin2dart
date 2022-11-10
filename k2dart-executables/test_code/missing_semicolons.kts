@@ -1,4 +1,6 @@
 fun main() {
+    var s= "someString"
+    var s2= "${s}" + "s2"
     var aa=12 ;
     var a=1
     val b:Double=2
