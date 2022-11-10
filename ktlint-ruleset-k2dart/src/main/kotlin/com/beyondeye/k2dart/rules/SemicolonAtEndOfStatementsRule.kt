@@ -26,7 +26,7 @@ public class SemicolonAtEndOfStatementsRule : Rule(ruleName) {
             //do we already have a semicolon?
             if(node.nextCodeSibling()?.elementType==ElementType.SEMICOLON) return
             needToAddSemicolon=true
-        } else if(node.elementType==ElementType.CALL_EXPRESSION) {
+        } else if(node.elementType==ElementType.CALL_EXPRESSION) { //KtCallExpression
             //do we already have a semicolon?
             if(node.nextCodeSibling()?.elementType==ElementType.SEMICOLON) return
             //is this a nested call?
