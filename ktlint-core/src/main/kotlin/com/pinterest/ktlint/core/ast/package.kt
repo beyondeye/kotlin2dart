@@ -9,10 +9,12 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiComment
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 import org.jetbrains.kotlin.psi.psiUtil.leaves
 import org.jetbrains.kotlin.psi.psiUtil.siblings
+
 // *DARIO* the most important method for manipulating ASTnode are here
 //         but there are also many defined inside Rules: grep "ASTNode." for finding them
 public fun ASTNode.nextLeaf(includeEmpty: Boolean = false, skipSubtree: Boolean = false): ASTNode? {
@@ -317,6 +319,30 @@ public fun ASTNode.upsertWhitespaceAfterMe(text: String) {
         }
     } else {
         lastChildLeafOrSelf().upsertWhitespaceAfterMe(text)
+    }
+}
+
+/**
+ * *DARIO*
+ * Updates or inserts a new semicolon element after the given node. If the node itself is a semicolon
+ * then don't do anything. If the node is a (nested) composite element, the semicolon element is
+ * added after the last child leaf.
+ * this method is adapted from [ASTNode.upsertWhitespaceAfterMe]
+ */
+public fun ASTNode.upsertSemicolonAfterMe() {
+    if (this is LeafElement) {
+        if(this.elementType==ElementType.SEMICOLON)
+            return
+        val next = treeNext ?: nextLeaf()
+        if (next != null && next.elementType == ElementType.SEMICOLON) {
+            return
+        } else {
+            LeafPsiElement(ElementType.SEMICOLON, ";").also { psiSemicolon ->
+                (psi as LeafElement).rawInsertAfterMe(psiSemicolon)
+            }
+        }
+    } else {
+        lastChildLeafOrSelf().upsertSemicolonAfterMe()
     }
 }
 

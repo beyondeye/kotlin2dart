@@ -12,7 +12,7 @@ class SemicolonAtEndOfStatementsTest {
             """
             |fun main() {
             |    var s= "someString"
-            |    var s2= \"${'$'}{s}\" + "s2"
+            |    var s2= "${'$'}{s}" + "s2"
             |    var aa=12 ;
             |    var a=1
             |    val b:Double=2
@@ -24,12 +24,12 @@ class SemicolonAtEndOfStatementsTest {
             |    return cos(sin(a))
             |    return a ?: b
             |}
-            """.trimIndent()
+            """.trimMargin()
         val formattedCode =
             """
             |fun main() {
             |    var s= "someString";
-            |    var s2= \"${'$'}{s}\" + "s2";
+            |    var s2= "${'$'}{s}" + "s2";
             |    var aa=12 ;
             |    var a=1;
             |    val b:Double=2;
@@ -41,7 +41,7 @@ class SemicolonAtEndOfStatementsTest {
             |    return cos(sin(a));
             |    return a ?: b;
             |}
-            """.trimIndent()
+            """.trimMargin()
         val rulesToTest= listOf<Rule>(SemicolonAtEndOfStatementsRule())
         val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
