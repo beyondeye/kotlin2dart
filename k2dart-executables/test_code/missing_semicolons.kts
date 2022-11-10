@@ -1,4 +1,5 @@
 fun main() {
+    var aa=12 ;
     var a=1
     val b:Double=2
     var c=1+2

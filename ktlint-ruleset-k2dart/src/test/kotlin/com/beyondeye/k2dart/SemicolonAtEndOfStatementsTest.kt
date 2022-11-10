@@ -11,6 +11,7 @@ class SemicolonAtEndOfStatementsTest {
         val code =
             """
             fun main() {
+                var aa=12 ;
                 var a=1
                 val b:Double=2
                 var c=1+2
@@ -25,6 +26,7 @@ class SemicolonAtEndOfStatementsTest {
         val formattedCode =
             """
              fun main() {
+                var aa=12 ;
                 var a=1;
                 val b:Double=2;
                 var c=1+2;
