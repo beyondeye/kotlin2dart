@@ -3,6 +3,7 @@ package com.beyondeye.k2dart
 import com.beyondeye.k2dart.rules.BasicTypesNamesRule
 import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
 import com.beyondeye.k2dart.rules.NumericalLiteralsRule
+import com.beyondeye.k2dart.rules.SemicolonAtEndOfStatementsRule
 import com.pinterest.ktlint.core.RuleProvider
 import com.pinterest.ktlint.core.RuleSetProviderV2
 
@@ -21,6 +22,7 @@ public class CustomRuleSetProvider :
     ) {
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
+            RuleProvider { SemicolonAtEndOfStatementsRule() },
             RuleProvider { BasicTypesNamesRule() },
             RuleProvider { NumericalLiteralsRule() },
             RuleProvider { FinalInsteadOfValRule() },
