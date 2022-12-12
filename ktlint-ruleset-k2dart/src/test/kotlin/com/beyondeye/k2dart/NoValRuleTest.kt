@@ -2,8 +2,6 @@ package com.beyondeye.k2dart
 
 import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
 import com.beyondeye.k2dart.testutils.CallbackResult
-import com.pinterest.ktlint.core.KtLint
-import com.pinterest.ktlint.core.RuleSet
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 // *DARIO* this for collecting result of a lint of operation
@@ -14,13 +12,15 @@ class NoValRuleTest {
         val code =
             """
              fun fn() {
-                var v = "var"
+                val v = "var"
+                var w = "val"
             }
             """.trimIndent()
         val formattedCode =
             """
              fun fn() {
                 final v = "var"
+                var w = "val"
             }
             """.trimIndent()
         val callbacks = mutableListOf<CallbackResult>()

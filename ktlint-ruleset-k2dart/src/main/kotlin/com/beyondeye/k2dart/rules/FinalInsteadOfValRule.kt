@@ -17,7 +17,7 @@ public class FinalInsteadOfValRule : Rule(ruleName) {
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
         if(node.isDartNode()) return
-        if (node.elementType == ElementType.VAR_KEYWORD) {
+        if (node.elementType == ElementType.VAL_KEYWORD) {
             //*DARIO* important: need also to call emit, that log that we identified something to change in the code
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
             emit(node.startOffset, ruleName, true)
