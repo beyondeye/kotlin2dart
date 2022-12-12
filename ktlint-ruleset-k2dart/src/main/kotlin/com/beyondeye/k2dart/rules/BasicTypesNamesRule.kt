@@ -41,8 +41,8 @@ public class BasicTypesNamesRule : Rule(ruleName) {
             //*DARIO* important: need also to call emit, that log that we identified something to change in the code
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
             emit(node.startOffset, ruleName, true)
-            val newIdentifierNode = identifierNode.replaceWithText(newIdentifier)
-            newIdentifierNode.asDartNode()
+            val newIdentifierNode = identifierNode.replaceWithText(newIdentifier) //update the AST with the converted type identifier
+            newIdentifierNode.asDartNode() //set also the dart node flag so that we will avoid processing this node again
         }
     }
 }

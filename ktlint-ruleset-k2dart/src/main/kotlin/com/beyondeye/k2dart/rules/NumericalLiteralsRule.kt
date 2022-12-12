@@ -37,8 +37,8 @@ public class NumericalLiteralsRule : Rule(ruleName) {
             //*DARIO* important: need also to call emit, that log that we identified something to change in the code
             //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
             emit(node.startOffset, ruleName, true)
-            val newNode=(node as LeafPsiElement).replaceWithText(newLiteral)
-            newNode.asDartNode()
+            val newNode=(node as LeafPsiElement).replaceWithText(newLiteral) //update the AST with the converted literal
+            newNode.asDartNode() //set also the dart node flag so that we will avoid processing this node again
         }
     }
 }
