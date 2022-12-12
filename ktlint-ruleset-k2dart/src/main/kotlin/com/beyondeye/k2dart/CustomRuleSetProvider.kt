@@ -1,14 +1,14 @@
 package com.beyondeye.k2dart
 
-import com.beyondeye.k2dart.rules.BasicTypesNamesRule
-import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
-import com.beyondeye.k2dart.rules.NumericalLiteralsRule
-import com.beyondeye.k2dart.rules.SemicolonAtEndOfStatementsRule
+import com.beyondeye.k2dart.rules.*
 import com.pinterest.ktlint.core.RuleProvider
 import com.pinterest.ktlint.core.RuleSetProviderV2
 
 public const val k2dartRulesetId: String = "k2dart"
 
+//TODO rename this to K2DartRuleSetProvider (need to rename references also in META-INF.services RuleSetProvider and RuleSetProviderV2
+// see also https://pinterest.github.io/ktlint/extensions/custom-rule-set/
+// Every time a new k2dart rule is added don't forget to add it in the list below in the definition of getRuleProviders()
 public class CustomRuleSetProvider :
     RuleSetProviderV2(
         id = k2dartRulesetId, //*DARIO* this id is used in order to identify this ruleset and decide if to include it or not
@@ -26,5 +26,6 @@ public class CustomRuleSetProvider :
             RuleProvider { BasicTypesNamesRule() },
             RuleProvider { NumericalLiteralsRule() },
             RuleProvider { FinalInsteadOfValRule() },
+            RuleProvider { VariableTypeBeforeNameRule() }
         )
 }
