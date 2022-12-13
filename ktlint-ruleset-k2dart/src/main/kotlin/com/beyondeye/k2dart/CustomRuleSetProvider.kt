@@ -25,7 +25,8 @@ public class CustomRuleSetProvider :
             RuleProvider { SemicolonAtEndOfStatementsRule() },
             RuleProvider { BasicTypesNamesRule() },
             RuleProvider { NumericalLiteralsRule() },
-            RuleProvider { FinalInsteadOfValRule() },
+            //*dario* FinalInsteadOfValRule rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
+            //RuleProvider { FinalInsteadOfValRule() },
             RuleProvider { VariableTypeBeforeNameRule() }
         )
 }

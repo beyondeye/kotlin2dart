@@ -7,6 +7,8 @@ import com.pinterest.ktlint.core.ast.ElementType
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 
+// FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
+// TODO: remove FinalInsteadOfValRule
 public class FinalInsteadOfValRule : Rule(ruleName) {
     public companion object {
         public const val ruleName:String="final-instead-of-val"
