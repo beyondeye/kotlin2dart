@@ -27,6 +27,7 @@ public class CustomRuleSetProvider :
             RuleProvider { NumericalLiteralsRule() },
             //*dario* FinalInsteadOfValRule rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
             //RuleProvider { FinalInsteadOfValRule() },
-            RuleProvider { VariableTypeBeforeNameRule() }
+            RuleProvider { VariableTypeBeforeNameRule() },
+            RuleProvider { FunDeclarationSyntaxRule() }
         )
 }

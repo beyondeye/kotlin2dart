@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 
 
-public class VariableTypeBeforeNameRule : Rule(ruleName) {
+public class FunDeclarationSyntaxRule : Rule(ruleName) {
     public companion object {
         public const val ruleName:String="basic-types-names"
     }
@@ -49,7 +49,7 @@ public class VariableTypeBeforeNameRule : Rule(ruleName) {
 
         } else { //we have a type specification
             val typeSpecNode=potentiallyColonNode.nextCodeSibling()
-            if(typeSpecNode?.elementType==ElementType.TYPE_REFERENCE) { //TODO mark as dart code to avoid reprocessing?
+            if(typeSpecNode?.elementType==ElementType.TYPE_REFERENCE) {
                 emit(node.startOffset, ruleName, true)
                 val parentNode=typeSpecNode.treeParent //todo: we actually have this already as the "node
                 parentNode.removeChild(typeSpecNode)

@@ -5,9 +5,9 @@ import com.pinterest.ktlint.core.Rule
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-class VariableTypeBeforeNameRuleTest {
+class FunDeclarationSyntaxRuleTest {
     @Test
-    fun `change order between type and variable name`() {
+    fun `change syntax for function declaration`() {
         val code =
             """
             class SomeClass;
