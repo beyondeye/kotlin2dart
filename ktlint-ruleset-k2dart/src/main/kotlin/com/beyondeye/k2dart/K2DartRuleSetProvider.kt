@@ -9,7 +9,7 @@ public const val k2dartRulesetId: String = "k2dart"
 //TODO rename this to K2DartRuleSetProvider (need to rename references also in META-INF.services RuleSetProvider and RuleSetProviderV2
 // see also https://pinterest.github.io/ktlint/extensions/custom-rule-set/
 // Every time a new k2dart rule is added don't forget to add it in the list below in the definition of getRuleProviders()
-public class CustomRuleSetProvider :
+public class K2DartRuleSetProvider :
     RuleSetProviderV2(
         id = k2dartRulesetId, //*DARIO* this id is used in order to identify this ruleset and decide if to include it or not
         about = About(

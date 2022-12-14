@@ -1,5 +1,6 @@
 package com.beyondeye.k2dart.rules
 
+import com.beyondeye.k2dart.k2dartRulesetId
 import com.beyondeye.k2dart.utils.asDartNode
 import com.beyondeye.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
@@ -10,7 +11,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 
 
-public class VariableTypeBeforeNameRule : Rule(ruleName) {
+public class VariableTypeBeforeNameRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="var-types-before-names"
     }

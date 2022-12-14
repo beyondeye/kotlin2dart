@@ -1,12 +1,12 @@
 package com.beyondeye.k2dart.rules
 
+import com.beyondeye.k2dart.k2dartRulesetId
 import com.beyondeye.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 
-//
-public class SemicolonAtEndOfStatementsRule : Rule(ruleName) {
+public class SemicolonAtEndOfStatementsRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="semicolon-at-end"
     }

@@ -1,5 +1,6 @@
 package com.beyondeye.k2dart.rules
 
+import com.beyondeye.k2dart.k2dartRulesetId
 import com.beyondeye.k2dart.utils.asDartNode
 import com.beyondeye.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
@@ -7,7 +8,7 @@ import com.pinterest.ktlint.core.ast.ElementType
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 
-public class NumericalLiteralsRule : Rule(ruleName) {
+public class NumericalLiteralsRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="numerical-literals"
     }

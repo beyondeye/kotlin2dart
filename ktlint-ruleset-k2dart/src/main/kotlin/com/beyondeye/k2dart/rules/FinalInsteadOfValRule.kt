@@ -1,5 +1,6 @@
 package com.beyondeye.k2dart.rules
 
+import com.beyondeye.k2dart.k2dartRulesetId
 import com.beyondeye.k2dart.utils.asDartNode
 import com.beyondeye.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
@@ -9,7 +10,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 
 // FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
 // TODO: remove FinalInsteadOfValRule
-public class FinalInsteadOfValRule : Rule(ruleName) {
+public class FinalInsteadOfValRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="final-instead-of-val"
     }

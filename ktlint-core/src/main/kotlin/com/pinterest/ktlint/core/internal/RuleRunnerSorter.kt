@@ -73,7 +73,8 @@ internal class RuleRunnerSorter {
             when (it.ruleSetId) {
                 "standard" -> 0
                 "experimental" -> 1
-                else -> 2
+                "k2dart" -> 2//*DARIO* todo I should remove from here "standard" and "experimental" that were ktlint rulesets, but it works also without removing them
+                else -> 3
             }
         }.thenBy { it.qualifiedRuleId }
 
@@ -137,7 +138,7 @@ internal class RuleRunnerSorter {
             val customRuleSetIds =
                 blockedRuleRunners
                     .map { it.ruleSetId }
-                    .filterNot { it == "standard" || it == "experimental" }
+                    .filterNot { it == "standard" || it == "experimental" || it=="k2dart"} // *DARIO* TODO I should remove "standard" and "experimenta" from here
                     .distinct()
                     .sorted()
             val prefix =

@@ -14,7 +14,7 @@ fun runRulesOnCodeFragment(
         KtLint.ExperimentalParams(
             text = code,
             ruleSets = listOf(
-                RuleSet("kotlin-to-dart", *rulesToTest.toTypedArray()),
+                RuleSet(k2dartRulesetId, *rulesToTest.toTypedArray()),
             ),
             userData = emptyMap(),
             cb = { e, corrected ->

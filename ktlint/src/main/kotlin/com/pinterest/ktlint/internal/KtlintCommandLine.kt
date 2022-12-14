@@ -51,21 +51,23 @@ import picocli.CommandLine.Parameters
 
 private lateinit var logger: KLogger
 
+private const val cmdName="k2dart" //ktlint
+
 @Command(
     headerHeading =
     """
-An anti-bikeshedding Kotlin linter with built-in formatter.
-(https://github.com/pinterest/ktlint).
+A kotlin-to-dart transpiler based on the ktlint engine.
+(https://github.com/beyondeye/kotlin2dart).
 
 Usage:
-  ktlint <flags> [patterns]
-  java -jar ktlint.jar <flags> [patterns]
+  $cmdName <flags> [patterns]
+  java -jar $cmdName.jar <flags> [patterns]
 
 Examples:
   # Check the style of all Kotlin files (ending with '.kt' or '.kts') inside the current dir (recursively).
   #
   # Hidden folders will be skipped.
-  ktlint
+  $cmdName
 
   # Check only certain locations starting from the current directory.
   #
@@ -74,15 +76,15 @@ Examples:
   #
   # Hidden folders will be skipped.
   # Check all '.kt' files in 'src/' directory, but ignore files ending with 'Test.kt':
-  ktlint "src/**/*.kt" "!src/**/*Test.kt"
+  $cmdName "src/**/*.kt" "!src/**/*Test.kt"
   # Check all '.kt' files in 'src/' directory, but ignore 'generated' directory and its subdirectories:
-  ktlint "src/**/*.kt" "!src/**/generated/**"
+  $cmdName "src/**/*.kt" "!src/**/generated/**"
 
   # Auto-correct style violations.
-  ktlint -F "src/**/*.kt"
+  $cmdName -F "src/**/*.kt"
 
   # Using custom reporter jar and overriding report location
-  ktlint --reporter=csv,artifact=/path/to/reporter/csv.jar,output=my-custom-report.csv
+  $cmdName --reporter=csv,artifact=/path/to/reporter/csv.jar,output=my-custom-report.csv
 Flags:
 """,
     synopsisHeading = "",
@@ -369,7 +371,7 @@ internal class KtlintCommandLine {
                         ruleProviders = ruleProviders,
                     )
                 }
-            }.parallel({ (file, errList) -> report(file.location(relative), errList, reporter) })
+            }.parallel({ (file, errList) -> report(file.location(relative), errList, reporter) }) //*DARIO* process multiple file in parallel
     }
 
     private fun lintStdin(
@@ -452,8 +454,10 @@ internal class KtlintCommandLine {
             if (stdin) {
                 print(formattedFileContent)
             } else {
-                if (fileContent !== formattedFileContent) {
-                    File(fileName).writeText(formattedFileContent, charset("UTF-8"))
+                //*DARIO* the output file for kotlin2dart is not the original file, but instead the corresponding ".dart" file
+                val dartFilename=toDartFilename(fileName)
+                if (fileContent !== formattedFileContent) { // *DARIO* here we write the formatted content
+                    File(dartFilename).writeText(formattedFileContent, charset("UTF-8"))
                 }
             }
         } else {
@@ -478,6 +482,20 @@ internal class KtlintCommandLine {
             }
         }
         return result
+    }
+
+    /**
+     * *DARIO* take a kotlin file filename and transform it to the corresponding .dart filename
+     */
+    private fun toDartFilename(fileName: String): String {
+        val dartFilenameSuffix="dart"
+        if(fileName.endsWith(".kt")) {
+            return fileName.take(fileName.length-2)+dartFilenameSuffix
+        } else if (fileName.endsWith(".kts")) {
+            return fileName.take(fileName.length-3)+dartFilenameSuffix
+        } else {
+            return "$fileName.$dartFilenameSuffix"
+        }
     }
 
     private fun loadReporter(): Reporter {

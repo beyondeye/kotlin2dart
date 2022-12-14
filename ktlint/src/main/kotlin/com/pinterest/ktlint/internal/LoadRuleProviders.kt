@@ -36,8 +36,8 @@ internal fun JarFiles.loadRuleProviders(
             //         the ktlint.jar is scanned for all linked library containing classes deriving from RuleSetProviderV2
             //         and all rules defined there are automatically included (if not filtered out here)
             rulesProvidersFromJar
-                .filterKeys { loadExperimental || it != "experimental" } //*DARIO* todo we don't use this flag
-                .filterKeys { !(disabledRules.isStandardRuleSetDisabled() && it == "standard") }
+                .filterKeys { loadExperimental || it != "experimental" } //*DARIO* todo we don't use this flag: change it to "kt2dart-experimental" and create new module with that name
+                .filterKeys { !(disabledRules.isStandardRuleSetDisabled() && it == "k2dart") } // *DARIO* our standard ruleset name is "k2dart"
                 .values
         }
         .flatten()
@@ -129,6 +129,8 @@ private fun getLegacyRuleProvidersFromJar(url: URL?) =
         }
 
 private fun String.isStandardRuleSetDisabled() =
-    this.split(",").map { it.trim() }.toSet().contains("standard")
+    this.split(",").map { it.trim() }.toSet().contains("k2dart") // *DARIO* our standard ruleset name is now "k2dart"
 
-private val KTLINT_RULE_SETS = listOf("standard", "experimental")
+
+//private val KTLINT_RULE_SETS = listOf("standard", "experimental")
+private val KTLINT_RULE_SETS = listOf("k2dart") // *DARIO* the only built-in ruleset is now "k2dart"
