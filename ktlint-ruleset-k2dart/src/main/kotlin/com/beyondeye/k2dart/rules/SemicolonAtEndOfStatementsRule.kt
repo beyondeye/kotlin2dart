@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 //
 public class SemicolonAtEndOfStatementsRule : Rule(ruleName) {
     public companion object {
-        public const val ruleName:String="basic-types-names"
+        public const val ruleName:String="semicolon-at-end"
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,

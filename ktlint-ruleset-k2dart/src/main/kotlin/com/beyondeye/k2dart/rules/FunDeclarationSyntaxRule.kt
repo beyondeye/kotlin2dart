@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 
 public class FunDeclarationSyntaxRule : Rule(ruleName) {
     public companion object {
-        public const val ruleName:String="basic-types-names"
+        public const val ruleName:String="fun-decl-syntax"
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,

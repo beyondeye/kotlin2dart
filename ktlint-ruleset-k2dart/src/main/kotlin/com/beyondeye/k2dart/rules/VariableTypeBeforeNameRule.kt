@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 
 public class VariableTypeBeforeNameRule : Rule(ruleName) {
     public companion object {
-        public const val ruleName:String="basic-types-names"
+        public const val ruleName:String="var-types-before-names"
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,
