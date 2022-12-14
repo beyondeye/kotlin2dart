@@ -45,14 +45,14 @@ internal class VisitorProvider(
 
     internal fun visitor(editorConfigProperties: EditorConfigProperties): ((rule: Rule, fqRuleId: String) -> Unit) -> Unit {
         val enabledRuleRunners =
-            ruleRunners
+            ruleRunners // *DARIO* note tha the returned list by "ruleRunners" is sorted with RuleRunnerSorter() based on rules list of VisitorModifier of each rule
                 .filter { ruleRunner -> isNotDisabled(editorConfigProperties, ruleRunner.qualifiedRuleId) }
         if (enabledRuleRunners.isEmpty()) {
             logger.debug { "Skipping file as no enabled rules are found to be executed" }
             return { _ -> }
         }
         val ruleRunnersToBeSkipped =
-            ruleRunners
+            ruleRunners // *DARIO* note tha the returned list by "ruleRunners" is sorted with RuleRunnerSorter() based on rules list of VisitorModifier of each rule
                 .filter { ruleRunner ->
                     val runAfterRule = ruleRunner.runAfterRule
                     runAfterRule != null &&
@@ -77,7 +77,7 @@ internal class VisitorProvider(
             return { _ -> }
         }
         return { visit ->
-            ruleRunnersToExecute.forEach {
+            ruleRunnersToExecute.sortedByDescending { it.pri }.forEach {// *DARIO* additional sort of ruleRunners by priority
                 visit(it.getRule(), it.shortenedQualifiedRuleId)
             }
         }

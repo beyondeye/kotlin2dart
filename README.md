@@ -28,12 +28,41 @@ will copy the jar file to this directory and rename it ``k2dart.jar``
   for examples.
 - Next run ``k2dart`` to just output the Abstract Syntax Tree (AST) for the code you have written.
   ``` java -jar .\k2dart.jar --print-ast  "test_code\<filename>.kts" >.\ast\<filename>_ast.txt```
-- Once you have the AST of the code with syntax you want to support, you can study to understand how
+- Once you have the AST of the code with syntax you want to support, you can analyze it to understand how
  to write a new k2dart rule to support it.
-- For writing a new k2dart rule, it is best to start by copying an existing rule in the [rules directory](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/rules)
+- For writing a new k2dart rule, it is best to start by copying an existing rule from the [rules directory](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/rules)
 in the [ktlint-ruleset-k2dart](./ktlint-ruleset-k2dart) module, and add it in the same directory. You also have to add the new rule
 to the ``k2dart`` [ruleset file](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/CustomRuleSetProvider.kt) in ``getRuleProviders()`` method. Note that unlike in the original ``ktlint`` each rule
-is associated with a priority that determine the execution order of the rule (higher priority: rule execute earlier)
+is associated with a priority that determine the execution order of the rule (higher priority: rule execute earlier). Default priority, if not specified, is zero. An alternative
+to estabilish dependency in execution order between rules, that is also used in the original ktlint, is to define
+the ``visitorModifiers`` argument in the constructor of ``Rule`` with the list of dependency, for example
+```kotlin
+class MyKotlinToDartRule :
+    Rule(
+        id = "my-kotlin-to-dart-rule",
+        visitorModifiers = setOf(
+            VisitorModifier.RunAfterRule(
+                ruleId = "k2dart:some-other-k2dart-rule",
+                loadOnlyWhenOtherRuleIsLoaded = true, //or false
+                runOnlyWhenOtherRuleIsEnabled = true, //or false
+            ),
+            VisitorModifier.RunAfterRule(
+              ruleId = "k2dart:another-k2dart-rule",
+              loadOnlyWhenOtherRuleIsLoaded = true, //or false
+              runOnlyWhenOtherRuleIsEnabled = true, //or false
+            ),
+          // VisitorModifier.RunAsLateAsPossible, //optionally add this
+        ),
+    )
+    {
+        // ... rule class definition here
+    }
+```
+**Important** make sure that you define a unique name for your rule by overriding the ``ruleName`` property, or in 
+general passing a unique ``id`` parameter to the parent ``Rule`` class constructor.
+Note that ordered defined by priority will override order of rules defined by ``RunAfterRule``
+- For each new rule you define, define also a test class in [test](./ktlint-ruleset-k2dart/src/test/kotlin/com/beyondeye/k2dart)
+directory see for example [this test class](ktlint-ruleset-k2dart/src/test/kotlin/com/beyondeye/k2dart/BasicTypeNamesRuleTest.kt).
 
  ## Contributing
 Writing additional rules to handle transpiling of code that is not currently supported are welcome.

@@ -119,6 +119,8 @@ public object KtLint {
                 ).distinctBy { it.ruleId }
                 .toSet()
 
+        //*DARIO* note that the set of rules obtained from this method is only used to interact with EditorConfig properties,
+        //        so the fact that we loose the priority information that is in RuleRunner, is not important
         internal fun getRules(): Set<Rule> =
             ruleRunners
                 .map { it.getRule() }
@@ -427,6 +429,11 @@ public object KtLint {
 }
 
 internal class RuleRunner(private val provider: RuleProvider) {
+    /**
+     * *DARIO*
+     * rule priority: higher => execute earlier
+     */
+    val pri:Int get()=provider.pri
     private var rule = provider.createNewRuleInstance()
 
     internal val qualifiedRuleId = rule.toQualifiedRuleId()
@@ -438,7 +445,7 @@ internal class RuleRunner(private val provider: RuleProvider) {
     val runOnRootNodeOnly =
         rule.visitorModifiers.contains(Rule.VisitorModifier.RunOnRootNodeOnly)
     val runAsLateAsPossible = rule.visitorModifiers.contains(Rule.VisitorModifier.RunAsLateAsPossible)
-    var runAfterRule = setRunAfterRule()
+    var runAfterRule = setRunAfterRule() //
 
     /**
      * Gets the [Rule]. If the [Rule] has already been used for traversal of the AST, a new instance of the [Rule] is
@@ -451,6 +458,7 @@ internal class RuleRunner(private val provider: RuleProvider) {
         return rule
     }
 
+    //
     private fun setRunAfterRule(): Rule.VisitorModifier.RunAfterRule? =
         rule
             .visitorModifiers

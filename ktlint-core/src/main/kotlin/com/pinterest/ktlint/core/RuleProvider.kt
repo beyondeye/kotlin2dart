@@ -8,6 +8,10 @@ package com.pinterest.ktlint.core
  */
 public class RuleProvider(
     /**
+     * *DARIO* the priority of the rule: higher priority => the rule will be executed earlier
+     */
+    public val pri:Int=0,
+    /**
      * Lambda which creates a new instance of the rule.
      */
     private val provider: () -> Rule,
