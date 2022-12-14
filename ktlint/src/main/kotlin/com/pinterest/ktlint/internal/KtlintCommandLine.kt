@@ -58,30 +58,28 @@ private const val cmdName="k2dart" //ktlint
     """
 A kotlin-to-dart transpiler based on the ktlint engine.
 (https://github.com/beyondeye/kotlin2dart).
+(https://github.com/pinterest/ktlint)
 
 Usage:
   $cmdName <flags> [patterns]
   java -jar $cmdName.jar <flags> [patterns]
 
 Examples:
-  # Check the style of all Kotlin files (ending with '.kt' or '.kts') inside the current dir (recursively).
+  # Transpile all Kotlin files (ending with '.kt' or '.kts') inside the current dir (recursively).
   #
   # Hidden folders will be skipped.
   $cmdName
 
-  # Check only certain locations starting from the current directory.
+  # Transpile only certain locations starting from the current directory.
   #
   # Prepend ! to negate the pattern, KtLint uses .gitignore pattern style syntax.
   # Globs are applied starting from the last one.
   #
   # Hidden folders will be skipped.
-  # Check all '.kt' files in 'src/' directory, but ignore files ending with 'Test.kt':
+  # Transpile all '.kt' files in 'src/' directory, but ignore files ending with 'Test.kt':
   $cmdName "src/**/*.kt" "!src/**/*Test.kt"
-  # Check all '.kt' files in 'src/' directory, but ignore 'generated' directory and its subdirectories:
+  # Transpile all '.kt' files in 'src/' directory, but ignore 'generated' directory and its subdirectories:
   $cmdName "src/**/*.kt" "!src/**/generated/**"
-
-  # Auto-correct style violations.
-  $cmdName -F "src/**/*.kt"
 
   # Using custom reporter jar and overriding report location
   $cmdName --reporter=csv,artifact=/path/to/reporter/csv.jar,output=my-custom-report.csv
@@ -94,16 +92,17 @@ Flags:
     versionProvider = KtlintVersionProvider::class,
 )
 // *DARIO* command line options for Ktlint are defined here
-//  TODO remove here options that are not relevant for kotlin2dart
 internal class KtlintCommandLine {
 
     @CommandLine.Spec
     private lateinit var commandSpec: CommandLine.Model.CommandSpec
 
+    /* *DARIO* the android flag has been removed
     @Option(
         names = ["--android", "-a"],
         description = ["Turn on Android Kotlin Style Guide compatibility"],
     )
+     */
     var android: Boolean = false
 
     @Option(
@@ -141,17 +140,21 @@ internal class KtlintCommandLine {
     )
     var disabledRules: String = ""
 
+    /* *DARIO*  the --format flag has been removed: format flag always on
     // TODO: this should have been a command, not a flag (consider changing in 1.0.0)
     @Option(
         names = ["--format", "-F"],
         description = ["Fix any deviations from the code style"],
     )
-    private var format: Boolean = false
+     */
+    private var format: Boolean = true
 
+    /* *DARIO* the --limit flag has been removed: always show (process) all
     @Option(
         names = ["--limit"],
         description = ["Maximum number of errors to show (default: show all)"],
     )
+     */
     private var limit: Int = -1
         get() = if (field < 0) Int.MAX_VALUE else field
 
@@ -189,7 +192,7 @@ internal class KtlintCommandLine {
     @Option(
         names = ["--patterns-from-stdin"],
         description = [
-            "Read additional patterns to check/format from stdin. " +
+            "Read additional patterns to transpile from stdin. " +
                 "Patterns are delimited by the given argument. (default is newline) " +
                 "If the argument is an empty string, the NUL byte is used.",
         ],
@@ -216,10 +219,12 @@ internal class KtlintCommandLine {
     )
     private var editorConfigPath: String? = null
 
+    /* *DARIO* currently we don't have experimental rules for k2dart TODO: add them in the future as a seperate module
     @Option(
         names = ["--experimental"],
         description = ["Enabled experimental rules (ktlint-ruleset-experimental)"],
     )
+     */
     var experimental: Boolean = false
 
     @Option(
