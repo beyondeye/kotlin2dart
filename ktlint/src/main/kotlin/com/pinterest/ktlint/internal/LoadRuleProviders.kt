@@ -47,6 +47,7 @@ private fun getRuleProvidersFromJar(
     url: URL?,
     debug: Boolean,
 ): Map<String, Set<RuleProvider>> {
+    if(debug) logger.debug { "**in getRuleProvidersFromJar" }
     if (url != null && debug) {
         logger.debug { "JAR ruleset provided with path \"${url.path}\"" }
     }
@@ -56,6 +57,7 @@ private fun getRuleProvidersFromJar(
                 RuleSetProviderV2::class.java,
                 URLClassLoader(listOfNotNull(url).toTypedArray()),
             ).filter {
+                if(debug) logger.debug { "found rule provider with id ${it.id}" }
                 // The KtLint-root (CLI) module includes the standard and experimental rule sets. When those rule sets
                 // are also included in the specified JAR (url != null) then ignore them.
                 url == null || it.id !in KTLINT_RULE_SETS
