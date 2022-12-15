@@ -4,10 +4,10 @@ import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
 import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
+import com.pinterest.ktlint.ruleset.k2dart.utils.createSimpleTypeNode
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
-
 
 public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
@@ -60,7 +60,7 @@ public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
         if (node.isDartNode()) return
         //find the "fun" keyword node, we will substitute it with return type specification
         var funKeywordNode =node.firstChildNode ?: return
-        if(funKeywordNode izNot ElementType.FUN) {
+        if(funKeywordNode izNot ElementType.FUN_KEYWORD) {
             funKeywordNode= funKeywordNode.nextSibling { it iz ElementType.FUN_KEYWORD } ?: return
         }
 
@@ -69,24 +69,27 @@ public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
         var isEqualSyntax=false
         var isUnitReturn=false
         val colonAfterParamsNode = parameterListNode.nextSibling { it iz ElementType.COLON }
-        var returnTypeNode:ASTNode?=null
+        val returnTypeNode:ASTNode?
         if(colonAfterParamsNode==null) {
             val equalAfterParamsNode = parameterListNode.nextSibling { it iz ElementType.EQ }
             if(equalAfterParamsNode!=null) {
                 isEqualSyntax=true
-                equalAfterParamsNode  as LeafPsiElement?
-                equalAfterParamsNode?.replaceWithText("=>")
+                equalAfterParamsNode  as LeafPsiElement
+                equalAfterParamsNode.replaceWithText("=>")
             } else {
                 isUnitReturn=true
                 val parentNode=funKeywordNode.treeParent
-//                parentNode.addChild("void",funKeywordNode ) //void type node
+                parentNode.addChild(createSimpleTypeNode("void"),funKeywordNode ) //void type node
                 parentNode.removeChild(funKeywordNode)
             }
-        } else {
+        } else { //we have a return type specification (colonAfterParamsNode!=null)
             returnTypeNode=colonAfterParamsNode.nextSibling { it iz ElementType.TYPE_REFERENCE }
-            //parentNode.addChild(returnTypeNode,funKeywordNode ) //void type node
-            //parentNode.removeChild(funKeywordNode)
-
+            if(returnTypeNode!=null) {
+                val parentNode=funKeywordNode.treeParent
+                parentNode.addChild(returnTypeNode,funKeywordNode ) //void type node
+                parentNode.removeChild(funKeywordNode)
+                parentNode.removeChild(colonAfterParamsNode)
+            }
         }
 
         var nextParam=parameterListNode.firstChildNode
@@ -96,72 +99,20 @@ public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
             val identifierNode=nextParam.findChildByType(ElementType.IDENTIFIER)
             if(identifierNode==null) {
                 //todo this should not happen
-                throw NotImplementedError()
+                continue //skip to next //cannot handle this
             }
-            val colonNode=identifierNode!!.nextCodeSibling()
-            if(colonNode==null) {
-                //todo this should not happen
-                throw NotImplementedError()
-            }
-            val typeNode = colonNode!!.nextSibling { it iz ElementType.TYPE_REFERENCE }
-            if(typeNode==null) {
-                //TODO this should not happen
-                throw NotImplementedError()
-            }
-            val parentNode=nextParam.treeParent //we actually already have this
+            val colonNode= identifierNode.nextCodeSibling()
+                ?: //todo this should not happen
+                continue //skip to next //cannot handle this
+            val typeNode = colonNode.nextSibling { it iz ElementType.TYPE_REFERENCE }
+                ?: //TODO this should not happen
+                continue //skip to next //cannot handle this
+            val parentNode=typeNode.treeParent //we actually already have this
             parentNode.removeChild(colonNode)
             parentNode.removeChild(typeNode)
             parentNode.addChild(typeNode,identifierNode) //add typeNode before identifierNode
             parentNode.addChild(PsiWhiteSpaceImpl(" "),identifierNode) //add space between typespec and identifier
         }
-
-        /*
-        var varvalKeywordNode=node.firstChildNode
-        var isVar=true
-        if(varvalKeywordNode.elementType==ElementType.VAL_KEYWORD) {
-            isVar=false
-            emit(varvalKeywordNode.startOffset, ruleName, true)
-            varvalKeywordNode = (varvalKeywordNode as LeafPsiElement).replaceWithText("final") //replace "val" with "final"
-            varvalKeywordNode.asDartNode() //set also the dart node flag so that we will avoid processing this node again
-
-        }
-        val identifierNode =varvalKeywordNode.nextCodeSibling()
-        if(identifierNode?.elementType!=ElementType.IDENTIFIER) {
-            //TODO this should not happen
-            return
-        }
-        val potentiallyColonNode=identifierNode.nextCodeSibling()
-        if(potentiallyColonNode?.elementType!=ElementType.COLON) { //we don't have a type specification for the property
-
-        } else { //we have a type specification
-            val typeSpecNode=potentiallyColonNode.nextCodeSibling()
-            if(typeSpecNode?.elementType==ElementType.TYPE_REFERENCE) {
-                emit(node.startOffset, ruleName, true)
-                val parentNode=typeSpecNode.treeParent //todo: we actually have this already as the "node
-                parentNode.removeChild(typeSpecNode)
-                parentNode.addChild(typeSpecNode,identifierNode) //add typespec before identifier
-                parentNode.addChild(PsiWhiteSpaceImpl(" "),identifierNode) //add space between typespec and identifier
-                if(isVar) //remove redundant "var" if this property is not finale
-                {
-                    val spaceAfterValVarKeyword=varvalKeywordNode.treeNext
-                    parentNode.removeChild(varvalKeywordNode)
-                    if(spaceAfterValVarKeyword.elementType==ElementType.WHITE_SPACE) //remove also original white space after var
-                    {
-                        parentNode.removeChild(spaceAfterValVarKeyword)
-                    }
-                }
-                parentNode.removeChild(potentiallyColonNode)
-            } else { //unhandled type definition
-                return
-            }
-            //TODO this should not happen
-            return
-        }
     }
-         */
-    }
-//    fun createTypeNode() :KtTypeReference {
-//        PsiTypeElementImpl
-//    }
 }
 

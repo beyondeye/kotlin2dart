@@ -1,14 +1,14 @@
 package com.beyondeye.k2dart
 
-import com.pinterest.ktlint.ruleset.k2dart.rules.VariableTypeBeforeNameRule
 import com.pinterest.ktlint.core.Rule
+import com.pinterest.ktlint.ruleset.k2dart.rules.FunDeclarationSyntaxRule
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-//
+
 class FunDeclarationSyntaxRuleTest {
     @Test
-    fun `change syntax for function declaration`() {
+    fun `change syntax for basic function declaration`() {
         val code =
             """
             fun fn1(arg1:Double, arg2:Float,arg3:AClass):Double {
@@ -17,11 +17,11 @@ class FunDeclarationSyntaxRuleTest {
             """.trimIndent()
         val formattedCode =
             """
-            Double fn1(Double arg1,Float arg2,AClass arg3) {
+            Double fn1(Double arg1, Float arg2,AClass arg3) {
                 return 1.0
             }
             """.trimIndent()
-        val rulesToTest= listOf<Rule>(VariableTypeBeforeNameRule())
+        val rulesToTest= listOf<Rule>(FunDeclarationSyntaxRule())
         val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
     }
