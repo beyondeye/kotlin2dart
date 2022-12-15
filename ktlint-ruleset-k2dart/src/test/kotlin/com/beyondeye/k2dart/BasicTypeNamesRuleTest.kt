@@ -10,7 +10,7 @@ class BasicTypeNamesRuleTest {
     fun `change basic type names`() {
         val code =
             """
-            fun main(arg1:Double, arg2:Float) {
+            fun main(arg1:Double, arg2:Float):Unit {
                 var d:Double = 1.0
                 var f:Float = 1f
                 val i:Int = 1
@@ -20,7 +20,7 @@ class BasicTypeNamesRuleTest {
             """.trimIndent()
         val formattedCode =
             """
-            fun main(arg1:double, arg2:double) {
+            fun main(arg1:double, arg2:double):void {
                 var d:double = 1.0
                 var f:double = 1f
                 val i:int = 1

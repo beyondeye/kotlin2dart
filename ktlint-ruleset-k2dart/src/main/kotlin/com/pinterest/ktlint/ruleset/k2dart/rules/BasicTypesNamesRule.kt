@@ -37,6 +37,7 @@ public class BasicTypesNamesRule : Rule("$k2dartRulesetId:$ruleName") {
                 "Int" -> "int"
                 "Long" -> "int"
                 "Boolean" -> "bool"
+                "Unit" -> "void"
                 else -> null
             }
         newIdentifier?.let {
