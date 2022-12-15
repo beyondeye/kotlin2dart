@@ -90,6 +90,12 @@ public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
                 parentNode.removeChild(funKeywordNode)
                 parentNode.removeChild(colonAfterParamsNode)
             }
+            val equalAfterParamsNode = returnTypeNode?.nextSibling { it iz ElementType.EQ }
+            if(equalAfterParamsNode!=null) {
+                isEqualSyntax=true
+                equalAfterParamsNode  as LeafPsiElement
+                equalAfterParamsNode.replaceWithText("=>")
+            }
         }
 
         var nextParam=parameterListNode.firstChildNode

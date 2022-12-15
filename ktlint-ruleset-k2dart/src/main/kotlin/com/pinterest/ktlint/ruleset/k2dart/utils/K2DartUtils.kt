@@ -21,6 +21,7 @@ internal fun ASTNode.asDartNode():ASTNode {
 
 /**
  * create an ASTNode for specifing a simple type (like void), with the same structure as it is returned by the Kotlin compiler
+ * Note tha I need to use rawAddChildren here because addChild throw exception when working on ASTNode not generated from a file by the compiler
  * Element(TYPE_REFERENCE)->Element(USER_TYPE)->Element(REFERENCE_EXPRESSION->PsiElement(IDENTIFIER)
  *  ~.psi.KtTypeReference (TYPE_REFERENCE)
  *    ~.psi.KtUserType (USER_TYPE)
@@ -30,10 +31,10 @@ internal fun ASTNode.asDartNode():ASTNode {
 internal fun createSimpleTypeNode(simpleTypeName:String) : ASTNode {
     val identifierNode= LeafPsiElement(ElementType.IDENTIFIER,simpleTypeName)
     val refExpressionNode = CompositeElement(ElementType.REFERENCE_EXPRESSION)
-    refExpressionNode.addChild(identifierNode)
+    refExpressionNode.rawAddChildren(identifierNode)
     val userTypeNode = CompositeElement(ElementType.USER_TYPE)
-    userTypeNode.addChild(refExpressionNode)
+    userTypeNode.rawAddChildren(refExpressionNode)
     val typeReferenceNode = CompositeElement(ElementType.TYPE_REFERENCE)
-    typeReferenceNode.addChild(userTypeNode)
+    typeReferenceNode.rawAddChildren(userTypeNode)
     return  typeReferenceNode
 }

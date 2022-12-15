@@ -25,6 +25,38 @@ class FunDeclarationSyntaxRuleTest {
         val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
     }
+    @Test
+    fun `change syntax for basic function with void return value`() {
+        val code =
+            """
+            fun fn1(arg1:Double, arg2:Float,arg3:AClass) {
+
+            }
+            """.trimIndent()
+        val formattedCode =
+            """
+            void fn1(Double arg1, Float arg2,AClass arg3) {
+
+            }
+            """.trimIndent()
+        val rulesToTest= listOf<Rule>(FunDeclarationSyntaxRule())
+        val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
+        Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
+    }
+    @Test
+    fun `change syntax for basic function with single value`() {
+        val code =
+            """
+            fun fn1(arg1:Double, arg2:Double):Double = arg1+arg2
+            """.trimIndent()
+        val formattedCode =
+            """
+            Double fn1(Double arg1, Double arg2) => arg1+arg2
+            """.trimIndent()
+        val rulesToTest= listOf<Rule>(FunDeclarationSyntaxRule())
+        val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
+        Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
+    }
 
 
 }
