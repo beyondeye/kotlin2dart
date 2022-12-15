@@ -31,13 +31,13 @@ public fun ASTNode.nextLeaf(includeEmpty: Boolean = false, skipSubtree: Boolean 
  *  *DARIO* a method for checking if a node is of a specific elementType
  *  a shortcut notation for a very frequent operation
  */
-public infix fun ASTNode.iz(elementType: IElementType):Boolean = this.elementType==elementType
+public infix fun ASTNode?.iz(elementType: IElementType):Boolean = this?.elementType==elementType
 
 /**
  *  *DARIO* a method for checking if a node is NOT of a specific elementType
  *  a shortcut notation for a very frequent operation
  */
-public infix fun ASTNode.izNot(elementType: IElementType):Boolean = this.elementType!=elementType
+public infix fun ASTNode?.izNot(elementType: IElementType):Boolean = this?.elementType!=elementType
 
 public fun ASTNode.nextLeaf(p: (ASTNode) -> Boolean): ASTNode? {
     var n = this.nextLeafAny()

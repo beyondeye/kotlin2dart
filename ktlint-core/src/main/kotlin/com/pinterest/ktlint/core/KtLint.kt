@@ -282,8 +282,8 @@ public object KtLint {
         // *DARIO* createRuleExecutionContext will parse the kotlin code and return the AST tree
         val ruleExecutionContext = createRuleExecutionContext(params)
 
-        var tripped = false // *DARIO* todo understand what is this flag for? apparently is set when at lease one emit message is output
-        var mutated = false // *DARIO* todo understand what is this flag for? apparently this is set
+        var tripped = false // *DARIO* set to true if  at least one emit message is outputed from the rule
+        var mutated = true // *DARIO* modified from original code where mutated is initialized to false: initialied to true so that independently from if we call emit in our rules or not, we will always regenerate the code from the updated AST
         val errors = mutableSetOf<Pair<LintError, Boolean>>()
         val visitorProvider = VisitorProvider(params = params)
         visitorProvider

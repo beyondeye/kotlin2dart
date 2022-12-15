@@ -28,6 +28,6 @@ public class K2DartRuleSetProvider :
             //*dario* FinalInsteadOfValRule rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
             //RuleProvider { FinalInsteadOfValRule() },
             RuleProvider { VariableTypeBeforeNameRule() },
-            RuleProvider { FunDeclarationSyntaxRule() }
+//            RuleProvider { FunDeclarationSyntaxRule() } //TODO uncomment this when FunDeclarationSyntaxRule completed
         )
 }

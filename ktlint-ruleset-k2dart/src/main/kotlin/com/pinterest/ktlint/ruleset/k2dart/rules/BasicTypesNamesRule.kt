@@ -5,6 +5,7 @@ import com.pinterest.ktlint.ruleset.k2dart.utils.asDartNode
 import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
+import com.pinterest.ktlint.core.ast.izNot
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 
@@ -26,7 +27,7 @@ public class BasicTypesNamesRule : Rule("$k2dartRulesetId:$ruleName") {
         if (node.elementType != ElementType.TYPE_REFERENCE) return
         val identifierNode: ASTNode? = node.firstChildNode.firstChildNode.firstChildNode
         if (identifierNode?.isDartNode() != false) return
-        if (identifierNode.elementType != ElementType.IDENTIFIER) return
+        if (identifierNode izNot  ElementType.IDENTIFIER) return
         identifierNode as LeafPsiElement
         val identifier = identifierNode.text
         val newIdentifier: String? =
@@ -39,9 +40,8 @@ public class BasicTypesNamesRule : Rule("$k2dartRulesetId:$ruleName") {
                 else -> null
             }
         newIdentifier?.let {
-            //*DARIO* important: need also to call emit, that log that we identified something to change in the code
-            //        otherwise, the mutated flag will not be set, and the corrected ast will be ignored
-            emit(node.startOffset, ruleName, true)
+            //*DARIO* emit is useless in k2dart, unless we want to write some log of what is corrected (useful for debugging)
+            //            emit(node.startOffset, ruleName, true) //
             val newIdentifierNode = identifierNode.replaceWithText(newIdentifier) //update the AST with the converted type identifier
             newIdentifierNode.asDartNode() //set also the dart node flag so that we will avoid processing this node again
         }
