@@ -1,6 +1,6 @@
 package com.beyondeye.k2dart
 
-import com.beyondeye.k2dart.rules.FinalInsteadOfValRule
+import com.pinterest.ktlint.ruleset.k2dart.rules.FinalInsteadOfValRule
 import com.beyondeye.k2dart.testutils.CallbackResult
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

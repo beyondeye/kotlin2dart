@@ -1,6 +1,6 @@
-package com.beyondeye.k2dart.unused
+package com.pinterest.ktlint.ruleset.k2dart.unused
 
-import com.beyondeye.k2dart.k2dartRulesetId
+import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
 import com.pinterest.ktlint.core.IndentConfig
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.api.DefaultEditorConfigProperties.indentSizeProperty
@@ -67,7 +67,9 @@ public class FunctionSignatureRule :
 
     override fun beforeFirstNode(editorConfigProperties: EditorConfigProperties) {
         with(editorConfigProperties) {
-            functionSignatureWrappingMinimumParameters = getEditorConfigValue(forceMultilineWhenParameterCountGreaterOrEqualThanProperty)
+            functionSignatureWrappingMinimumParameters = getEditorConfigValue(
+                forceMultilineWhenParameterCountGreaterOrEqualThanProperty
+            )
             functionBodyExpressionWrapping = getEditorConfigValue(functionBodyExpressionWrappingProperty)
             val indentConfig = IndentConfig(
                 indentStyle = getEditorConfigValue(indentStyleProperty),

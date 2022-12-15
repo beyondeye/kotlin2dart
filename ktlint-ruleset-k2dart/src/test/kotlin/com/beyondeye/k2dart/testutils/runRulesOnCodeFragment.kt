@@ -4,6 +4,7 @@ import com.beyondeye.k2dart.testutils.CallbackResult
 import com.pinterest.ktlint.core.KtLint
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.RuleSet
+import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
 
 fun runRulesOnCodeFragment(
     code: String,

@@ -1,10 +1,10 @@
-package com.beyondeye.k2dart
+package com.pinterest.ktlint.ruleset.k2dart
 
-import com.beyondeye.k2dart.rules.*
 import com.pinterest.ktlint.core.RuleProvider
 import com.pinterest.ktlint.core.RuleSetProviderV2
+import com.pinterest.ktlint.ruleset.k2dart.rules.*
 
-public const val k2dartRulesetId: String = "k2dart"
+public const val k2dartRulesetId: String = "ktodart"
 
 //TODO rename this to K2DartRuleSetProvider (need to rename references also in META-INF.services RuleSetProvider and RuleSetProviderV2
 // see also https://pinterest.github.io/ktlint/extensions/custom-rule-set/

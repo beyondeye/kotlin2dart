@@ -1,6 +1,6 @@
-package com.beyondeye.k2dart.unused
+package com.pinterest.ktlint.ruleset.k2dart.unused
 
-import com.beyondeye.k2dart.k2dartRulesetId
+import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
 import com.pinterest.ktlint.core.ast.ElementType.FUN_KEYWORD

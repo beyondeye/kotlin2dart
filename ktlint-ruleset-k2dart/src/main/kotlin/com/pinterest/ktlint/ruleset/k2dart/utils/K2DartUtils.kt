@@ -1,4 +1,4 @@
-package com.beyondeye.k2dart.utils
+package com.pinterest.ktlint.ruleset.k2dart.utils
 
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.openapi.util.Key

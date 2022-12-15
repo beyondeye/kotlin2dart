@@ -1,7 +1,7 @@
-package com.beyondeye.k2dart.rules
+package com.pinterest.ktlint.ruleset.k2dart.rules
 
-import com.beyondeye.k2dart.k2dartRulesetId
-import com.beyondeye.k2dart.utils.isDartNode
+import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
+import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode

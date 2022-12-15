@@ -1,4 +1,4 @@
-package com.beyondeye.k2dart.unused
+package com.pinterest.ktlint.ruleset.k2dart.unused
 
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
