@@ -1,0 +1,14 @@
+void main() {
+    var s= "someString";
+    var s2= "${s}" + "s2";
+    var aa=12 ;
+    var a=1;
+    final double b=2;
+    var c=1+2;
+    var d=a+b;
+    var e=cos(d);
+    cos(a);
+    return a+b;
+    return cos(sin(a));
+    return a ?: b;
+}
