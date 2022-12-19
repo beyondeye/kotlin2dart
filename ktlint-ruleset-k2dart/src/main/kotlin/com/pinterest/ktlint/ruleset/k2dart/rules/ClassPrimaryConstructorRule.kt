@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.psi.psiUtil.children
 //
 public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
-        public const val ruleName:String="fun-decl-syntax"
+        public const val ruleName:String="class-primary-constr"
         //             ~.psi.KtParameter (VALUE_PARAMETER)
         //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
         //               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
