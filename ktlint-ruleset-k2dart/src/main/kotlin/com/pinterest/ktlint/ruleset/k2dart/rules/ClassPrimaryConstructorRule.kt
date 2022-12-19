@@ -1,11 +1,13 @@
 package com.pinterest.ktlint.ruleset.k2dart.rules
 
 import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
-import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
+import com.pinterest.ktlint.ruleset.k2dart.utils.*
 import com.pinterest.ktlint.ruleset.k2dart.utils.addChildAfter
 import com.pinterest.ktlint.ruleset.k2dart.utils.createEmptyClassBodyNode
+import com.pinterest.ktlint.ruleset.k2dart.utils.getEnclosingClassName
+import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
@@ -112,9 +114,8 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         if(classBodyNode==null)
         {
             classBodyNode=createEmptyClassBodyNode()
-            val crAfterPrimaryConstructorNode=PsiWhiteSpaceImpl("\n")
-            node.treeParent.addChildAfter(crAfterPrimaryConstructorNode,node)
-            node.treeParent.addChildAfter(classBodyNode,crAfterPrimaryConstructorNode)
+            val crAfterPrimaryConstructorNode =node.treeParent.addNewlineAfter(node)
+            node.treeParent.addChildAfter(crAfterPrimaryConstructorNode, classBodyNode)
         }
         val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace
 
@@ -123,10 +124,25 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         for(p in extractedParams)
         {
             val fieldDeclarationNode=fieldDeclFromConstructorParameter(p) ?:continue
-            classBodyNode.addChildAfter(fieldDeclarationNode,prev)
-            prev=fieldDeclarationNode
+            prev=classBodyNode.addChildAfter(prev, fieldDeclarationNode)
         }
+        val className=node.getEnclosingClassName()
+        //now write hire the constructor with this.a parameters
+        var dartConstructorStr="$className("
+        for(p in extractedParams)
+        {
+            val paramNameNode= p.findChildByType(ElementType.IDENTIFIER) ?: continue
+            dartConstructorStr+= "this.${paramNameNode.text},"
+        }
+        dartConstructorStr +=");"
+        val darConstructorNode=LeafPsiElement(ElementType.DART_CODE,dartConstructorStr)
+        prev= classBodyNode.addNewlineAfter(prev)
+        prev=classBodyNode.addChildAfter(prev, darConstructorNode)
+        prev= classBodyNode.addNewlineAfter(prev)
 
+        //finally convert the primary constructor code to a comment in case that we did not transpile it
+        //correctly
+        node.commentOutNode()
     }
 }
 

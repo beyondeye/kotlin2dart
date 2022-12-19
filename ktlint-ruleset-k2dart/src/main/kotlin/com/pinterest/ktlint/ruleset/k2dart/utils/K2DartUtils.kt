@@ -1,11 +1,13 @@
 package com.pinterest.ktlint.ruleset.k2dart.utils
 
 import com.pinterest.ktlint.core.ast.ElementType
+import com.pinterest.ktlint.core.ast.iz
 import com.pinterest.ktlint.core.ast.nextSibling
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.openapi.util.Key
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiCommentImpl
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 
@@ -24,8 +26,9 @@ internal fun ASTNode.asDartNode():ASTNode {
 /**
  * the standard [ASTNode.addChild] can be used to add a child node BEFORE another node
  * This method is for adding a child AFTER another node
+ * return the added node
  */
-internal fun ASTNode.addChildAfter(nodeToAdd:ASTNode,addAfterNode:ASTNode?) {
+internal fun ASTNode.addChildAfter(addAfterNode: ASTNode?, nodeToAdd: ASTNode): ASTNode {
     val nextNode =
         if (addAfterNode == null) { //add as first child node
             firstChildNode.treeNext
@@ -33,8 +36,15 @@ internal fun ASTNode.addChildAfter(nodeToAdd:ASTNode,addAfterNode:ASTNode?) {
             addAfterNode.treeNext
 
     this.addChild(nodeToAdd,nextNode)
+    return nodeToAdd
 }
 
+
+/**
+ * same as [addChildAfter] for adding a newLine node
+ */
+internal fun ASTNode.addNewlineAfter(addAfterNode:ASTNode?):ASTNode=
+    addChildAfter(addAfterNode, PsiWhiteSpaceImpl("\n"))
 
 /**
  * check if this is of the specified [elementType], if this not the case
@@ -45,6 +55,41 @@ internal fun ASTNode?.thisOrNextSiblingOfType(elementType: IElementType):ASTNode
     if(this==null) return  null
     if(this.elementType==elementType) return this
     return nextSibling { it.elementType==elementType }
+}
+
+/**
+ * find the first parent of this node that is a [ElementType.CLASS] node
+ */
+internal fun ASTNode?.getEnclosingClassNode():ASTNode? {
+    if(this==null) return null
+    var parentNode=this
+    while(parentNode!=null) {
+        parentNode=parentNode.treeParent
+        if(parentNode iz ElementType.CLASS) return  parentNode
+    }
+    return null
+}
+
+/**
+ * find the enclosing class name
+ */
+internal fun ASTNode?.getEnclosingClassName():String? {
+    val classNode=getEnclosingClassNode() ?:return null
+    val identifierNode = classNode.findChildByType(ElementType.IDENTIFIER) ?:return null
+    return identifierNode.text
+}
+
+
+/**
+ * substitute an [ASTNode] with its block-commented equivalent
+ */
+internal fun ASTNode?.commentOutNode() {
+    if(this==null) return
+    val parent=treeParent ?: return
+    val kotlinCodeConvertedToComment= PsiCommentImpl(ElementType.BLOCK_COMMENT,"/* $text */")
+    parent.addChild(kotlinCodeConvertedToComment,this)
+    parent.removeChild(this)
+
 }
 
 /**

@@ -5,7 +5,7 @@ import com.pinterest.ktlint.ruleset.k2dart.rules.ClassPrimaryConstructorRule
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-//
+
 class ClassPrimaryConstructorRuleTest {
     @Test
     fun `change syntax for basic function declaration`() {
@@ -15,10 +15,12 @@ class ClassPrimaryConstructorRuleTest {
             """.trimIndent()
         val formattedCode =
             """
-            class A {
-                val a:String
-                var b:Int
-                A(this.a,this.b)
+            class A/* (val a:String,var b:Int) */
+            {
+            val a:String
+            var b:Int
+
+            A(this.a,this.b,);
             }
             """.trimIndent()
         val rulesToTest= listOf<Rule>(ClassPrimaryConstructorRule())

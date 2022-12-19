@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
 import org.jetbrains.kotlin.kdoc.lexer.KDocTokens
 import org.jetbrains.kotlin.kdoc.parser.KDocElementTypes
+import org.jetbrains.kotlin.lexer.KtToken
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.stubs.elements.KtFileElementType
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
@@ -289,4 +290,8 @@ public object ElementType {
     public val KDOC_SECTION: IElementType = KDocElementTypes.KDOC_SECTION
     public val KDOC_TAG: IElementType = KDocElementTypes.KDOC_TAG
     public val KDOC_NAME: IElementType = KDocElementTypes.KDOC_NAME
+
+    // *DARIO*
+    // mark elements that are kotlin code translated to dart, whose intenal structure should be ignored by subsequent rules
+    public val DART_CODE: IElementType = KtToken("DART_CODE")
 }
