@@ -4,121 +4,129 @@ import com.pinterest.ktlint.ruleset.k2dart.k2dartRulesetId
 import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
-import com.pinterest.ktlint.ruleset.k2dart.utils.createSimpleTypeNode
+import com.pinterest.ktlint.ruleset.k2dart.utils.addChildAfter
+import com.pinterest.ktlint.ruleset.k2dart.utils.createEmptyClassBodyNode
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.TreeElement
+import org.jetbrains.kotlin.psi.psiUtil.children
 
+//
 public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="fun-decl-syntax"
+        //             ~.psi.KtParameter (VALUE_PARAMETER)
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
+        //               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "d"
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+        //               ~.psi.KtTypeReference (TYPE_REFERENCE)
+        //                 ~.psi.KtUserType (USER_TYPE)
+        //                   ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+        //                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
+        private fun fieldDeclFromConstructorParameter(p: ASTNode): ASTNode? {
+            val valOrVarNode= p.firstChildNode ?: return  null
+            valOrVarNode as LeafPsiElement
+            var isVar=false
+            var isVal=false
+            var isParam=false
+            if(valOrVarNode iz ElementType.VAL_KEYWORD) {
+                isVal=true
+            } else if(valOrVarNode iz ElementType.VAR_KEYWORD) {
+                isVar=true
+            } else {
+                isParam=true
+            }
+            if(isParam) return null //not a field
+//            val identifierNode=valOrVarNode.nextSibling {it iz ElementType.IDENTIFIER} ?:return null
+//            val typeRefNode= identifierNode.nextSibling { it iz ElementType.TYPE_REFERENCE } ?:return null
+
+            val newProperty=CompositeElement(ElementType.PROPERTY)
+            for(c in p.children())
+            {
+                newProperty.rawAddChildren(c.clone() as TreeElement)
+            }
+            newProperty.rawAddChildren(PsiWhiteSpaceImpl("\n"))
+            return newProperty
+        }
     }
+
+
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
-
-        //  ~.psi.KtNamedFunction (FUN)
-        //    ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
-        //    ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
-        //    ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "fn1"
-        //    ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
-        //      ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
-        //      ~.psi.KtParameter (VALUE_PARAMETER)
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "arg1"
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
-        //        ~.psi.KtTypeReference (TYPE_REFERENCE)
-        //          ~.psi.KtUserType (USER_TYPE)
-        //            ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-        //              ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
-        //      ~.c.i.p.impl.source.tree.LeafPsiElement (COMMA) ","
-        //      ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
-        //      ~.psi.KtParameter (VALUE_PARAMETER)
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "arg2"
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
-        //        ~.psi.KtTypeReference (TYPE_REFERENCE)
-        //          ~.psi.KtUserType (USER_TYPE)
-        //            ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-        //              ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Float"
-        //      ~.c.i.p.impl.source.tree.LeafPsiElement (COMMA) ","
-        //      ~.psi.KtParameter (VALUE_PARAMETER)
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "arg3"
-        //        ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
-        //        ~.psi.KtTypeReference (TYPE_REFERENCE)
-        //          ~.psi.KtUserType (USER_TYPE)
-        //            ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-        //              ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "AClass"
-        //      ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
-        //    ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
-        //    ~.psi.KtTypeReference (TYPE_REFERENCE)
-        //      ~.psi.KtUserType (USER_TYPE)
-        //        ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-        //          ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
-        if (node izNot ElementType.FUN) return
+        //       ~.psi.KtClass (CLASS)
+        //         ~.c.i.p.impl.source.tree.LeafPsiElement (CLASS_KEYWORD) "class"
+        //         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+        //         ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "B"
+        //         ~.psi.KtPrimaryConstructor (PRIMARY_CONSTRUCTOR)
+        //           ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+        //             ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+        //             ~.psi.KtParameter (VALUE_PARAMETER)
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+        //               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "c"
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+        //               ~.psi.KtTypeReference (TYPE_REFERENCE)
+        //                 ~.psi.KtUserType (USER_TYPE)
+        //                   ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+        //                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "String"
+        //             ~.c.i.p.impl.source.tree.LeafPsiElement (COMMA) ","
+        //             ~.psi.KtParameter (VALUE_PARAMETER)
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
+        //               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "d"
+        //               ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+        //               ~.psi.KtTypeReference (TYPE_REFERENCE)
+        //                 ~.psi.KtUserType (USER_TYPE)
+        //                   ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+        //                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
+        //             ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+        //         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+        //         ~.psi.KtClassBody (CLASS_BODY)
+        //           ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+        //           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n"
+        //           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+        //       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n"
+        if (node izNot ElementType.PRIMARY_CONSTRUCTOR) return
 
         if (node.isDartNode()) return
-        //find the "fun" keyword node, we will substitute it with return type specification
-        var funKeywordNode =node.firstChildNode ?: return
-        if(funKeywordNode izNot ElementType.FUN_KEYWORD) {
-            funKeywordNode= funKeywordNode.nextSibling { it iz ElementType.FUN_KEYWORD } ?: return
+        //we are going to process the valueParamListNode and then remove it
+        val valueParamListNode =node.firstChildNode ?: return
+        if(valueParamListNode izNot ElementType.VALUE_PARAMETER_LIST)  return
+        //note: that nextPar is not assigned an actual parameter, only after call to nextSibling it will contain it
+        var nextPar=valueParamListNode.firstChildNode
+        val extractedParams= mutableListOf<ASTNode>()
+        while(nextPar!=null)  {
+            nextPar=nextPar.nextSibling { it iz ElementType.VALUE_PARAMETER }
+            if(nextPar!=null) {
+                extractedParams.add(nextPar)
+            }
+        }
+        //now check if we have a class body, and if not create it
+        var classBodyNode=node.nextSibling{it iz ElementType.CLASS_BODY}
+        if(classBodyNode==null)
+        {
+            classBodyNode=createEmptyClassBodyNode()
+            val crAfterPrimaryConstructorNode=PsiWhiteSpaceImpl("\n")
+            node.treeParent.addChildAfter(crAfterPrimaryConstructorNode,node)
+            node.treeParent.addChildAfter(classBodyNode,crAfterPrimaryConstructorNode)
+        }
+        val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace
+
+        //now move parameter declarations inside class body
+        var prev=callBodyNodeFirstChildInside
+        for(p in extractedParams)
+        {
+            val fieldDeclarationNode=fieldDeclFromConstructorParameter(p) ?:continue
+            classBodyNode.addChildAfter(fieldDeclarationNode,prev)
+            prev=fieldDeclarationNode
         }
 
-        val parameterListNode=funKeywordNode.nextSibling { it iz ElementType.VALUE_PARAMETER_LIST } ?:return
-        //TODO instead of colonNode it is possible to have an = node that must be substituted with =>
-        var isEqualSyntax=false
-        var isUnitReturn=false
-        val colonAfterParamsNode = parameterListNode.nextSibling { it iz ElementType.COLON }
-        val returnTypeNode:ASTNode?
-        if(colonAfterParamsNode==null) {
-            val equalAfterParamsNode = parameterListNode.nextSibling { it iz ElementType.EQ }
-            if(equalAfterParamsNode!=null) {
-                isEqualSyntax=true
-                equalAfterParamsNode  as LeafPsiElement
-                equalAfterParamsNode.replaceWithText("=>")
-            } else {
-                isUnitReturn=true
-                val parentNode=funKeywordNode.treeParent
-                parentNode.addChild(createSimpleTypeNode("void"),funKeywordNode ) //void type node
-                parentNode.removeChild(funKeywordNode)
-            }
-        } else { //we have a return type specification (colonAfterParamsNode!=null)
-            returnTypeNode=colonAfterParamsNode.nextSibling { it iz ElementType.TYPE_REFERENCE }
-            if(returnTypeNode!=null) {
-                val parentNode=funKeywordNode.treeParent
-                parentNode.addChild(returnTypeNode,funKeywordNode ) //void type node
-                parentNode.removeChild(funKeywordNode)
-                parentNode.removeChild(colonAfterParamsNode)
-            }
-            val equalAfterParamsNode = returnTypeNode?.nextSibling { it iz ElementType.EQ }
-            if(equalAfterParamsNode!=null) {
-                isEqualSyntax=true
-                equalAfterParamsNode  as LeafPsiElement
-                equalAfterParamsNode.replaceWithText("=>")
-            }
-        }
-
-        var nextParam=parameterListNode.firstChildNode
-        while(true) {
-            nextParam=nextParam.nextSibling { it iz ElementType.VALUE_PARAMETER }
-            if(nextParam==null) break
-            val identifierNode=nextParam.findChildByType(ElementType.IDENTIFIER)
-            if(identifierNode==null) {
-                //todo this should not happen
-                continue //skip to next //cannot handle this
-            }
-            val colonNode= identifierNode.nextCodeSibling()
-                ?: //todo this should not happen
-                continue //skip to next //cannot handle this
-            val typeNode = colonNode.nextSibling { it iz ElementType.TYPE_REFERENCE }
-                ?: //TODO this should not happen
-                continue //skip to next //cannot handle this
-            val parentNode=typeNode.treeParent //we actually already have this
-            parentNode.removeChild(colonNode)
-            parentNode.removeChild(typeNode)
-            parentNode.addChild(typeNode,identifierNode) //add typeNode before identifierNode
-            parentNode.addChild(PsiWhiteSpaceImpl(" "),identifierNode) //add space between typespec and identifier
-        }
     }
 }
 

@@ -22,6 +22,10 @@ public class K2DartRuleSetProvider :
     ) {
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
+            /**
+             * this rule should run before VariableTypeBeforeNameRule so we assign to it higher priority
+             */
+            RuleProvider(1) { ClassPrimaryConstructorRule() },
             RuleProvider { SemicolonAtEndOfStatementsRule() },
             RuleProvider { BasicTypesNamesRule() },
             RuleProvider { NumericalLiteralsRule() },
@@ -29,6 +33,5 @@ public class K2DartRuleSetProvider :
             //RuleProvider { FinalInsteadOfValRule() },
             RuleProvider { VariableTypeBeforeNameRule() },
             RuleProvider { FunDeclarationSyntaxRule() },
-            RuleProvider { ClassPrimaryConstructorRule() }
         )
 }
