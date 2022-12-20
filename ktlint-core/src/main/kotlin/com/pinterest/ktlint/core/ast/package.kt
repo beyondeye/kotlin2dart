@@ -349,7 +349,11 @@ public fun ASTNode.upsertSemicolonAfterMe() {
             return
         } else {
             LeafPsiElement(ElementType.SEMICOLON, ";").also { psiSemicolon ->
-                (psi as LeafElement).rawInsertAfterMe(psiSemicolon)
+                val psi_ = psi as LeafElement
+                if (psi_.text.endsWith("\n")) //*DARIO* bug fix for cases where we have a psi element that is only a newline
+                    psi_.rawInsertBeforeMe(psiSemicolon)
+                else
+                    psi_.rawInsertAfterMe(psiSemicolon)
             }
         }
     } else {
