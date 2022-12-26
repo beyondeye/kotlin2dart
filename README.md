@@ -12,6 +12,12 @@ For porting code that relies on kotlin standard libraries and collections, we re
 the [kt_dart package](https://pub.dev/packages/kt_dart), in other words, ``kt.dart`` will be a required dependency of
 the produced code.
 
+## What it is not good for
+Code containing low level async code (low level coroutine builders like ``suspendCoroutine`` ) should be
+definitely being translated manually. Also, extra care should be put in methods transformed
+from ``suspend`` methods to ``async`` functions, that all calls to ``suspend`` functions 
+must be prefixed with ``await``. Currently, this is not done automatically.
+
 ## Building k2dart
 First clone this repository.
 Then, in order to build the ``ktlint.jar`` file, you need to run the ``shadowJarExecutable`` gradle task:
