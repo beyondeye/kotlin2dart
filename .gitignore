@@ -3,6 +3,7 @@ target
 build
 !ktlint/src/main/resources/config/.idea
 /.idea
+/kotlinc
 *.iml
 out
 /k2dart-executables/k2dart.jar
