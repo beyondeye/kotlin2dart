@@ -54,9 +54,9 @@ fun appendNewRuleInRuleSetProvider(ruleSetProviderTxt: String, newRuleName: Stri
 
 val isDebugMode=true
 
-// Get the passed in path, i.e. "-d some/path" or use the current path.
-//val path = if (args.contains("-d")) args[1 + args.indexOf("-d")]
-//else "."
+// Get the passed in path to kotlin file, i.e. "-d some/path"
+val input_test_code_file_path = if (args.contains("-d")) args[1 + args.indexOf("-d")]  else ""
+if(input_test_code_file_path.isEmpty()) throw Exception("Missing  argument with path to file in test_code to base the rule on: specify it with -d /some/path ")
 val base_path= Paths.get("C:\\startup\\WORK\\sel_app\\TOOLS\\K2DART\\kotlin2dart")
 val executables_path=base_path.resolve("k2dart-executables")
 val test_code_path=executables_path.resolve("test_code")
@@ -80,7 +80,7 @@ val template_test_file_path=test_path_k2dart.resolve("FinalInsteadOfValRuleTest.
 //print(test_path_k2dart)
 
 //    if (isDebugMode) "comments.kts" else if (args.contains("-f")) args[1 + args.indexOf("-d")] else ""
-val code_path = test_code_path.resolve("basic\\comments.kts")
+val code_path = executables_path.resolve(input_test_code_file_path).normalize()
 val code_file=code_path.toFile()
 
 val code_fname = code_path.fileName.toString()
@@ -95,6 +95,9 @@ if(code_fname.isEmpty()) {
 
 if(!code_file.exists()) {
     throw Exception("file $code_path with test code for new rule not found")
+}
+if(!code_fname.endsWith(".kts")&& !code_fname.endsWith(".kt")) {
+    throw Exception("file $code_fname is not a Kotlin file!")
 }
 
 val new_name=code_fname.removeSuffix(".kts").removeSuffix(".kt")
