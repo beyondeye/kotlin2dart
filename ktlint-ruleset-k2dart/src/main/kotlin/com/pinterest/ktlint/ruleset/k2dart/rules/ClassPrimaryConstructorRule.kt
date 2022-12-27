@@ -30,7 +30,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         //                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
         private fun fieldDeclFromConstructorParameter(p: ASTNode): ASTNode? {
             val valOrVarNode= p.firstChildNode ?: return  null
-            valOrVarNode as LeafPsiElement
+            if(valOrVarNode !is LeafPsiElement) return  null
             var isVar=false
             var isVal=false
             var isParam=false
