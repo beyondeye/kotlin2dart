@@ -21,7 +21,7 @@ must be prefixed with ``await``. Currently, this is not done automatically.
 ## Building k2dart
 First clone this repository.
 Then, in order to build the ``ktlint.jar`` file, you need to run the ``shadowJarExecutable`` gradle task:
-See [build_k2dart.bat](./build_k2dart.bat).
+See [build_k2dart.bat](./rebuild_k2dart.bat).
 
 Then ``cd`` to the [k2dart-executables](./k2dart-executables) directory
 and run the [fetch_k2dart_executable.bat](./k2dart-executables/fetch_k2dart_executable.bat) script that
