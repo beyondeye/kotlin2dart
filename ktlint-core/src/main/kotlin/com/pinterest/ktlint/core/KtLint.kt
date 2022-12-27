@@ -261,6 +261,7 @@ public object KtLint {
                 if (autoCorrect) {
                     // line/col cannot be reliably mapped as exception might originate from a node not present in the
                     // original AST
+                    print(e.toString()+"\r\n"); //e.stackTraceToString() does not actually give more information, only noise
                     throw RuleExecutionException(0, 0, fqRuleId, e)
                 } else {
                     val (line, col) = positionInTextLocator(node.startOffset)
