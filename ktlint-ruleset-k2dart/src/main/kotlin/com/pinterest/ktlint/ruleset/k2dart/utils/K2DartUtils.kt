@@ -112,6 +112,11 @@ internal fun createSimpleTypeNode(simpleTypeName:String) : ASTNode {
     return  typeReferenceNode
 }
 
+internal  fun createDartCodeNode(dartCode:String) :ASTNode {
+    return LeafPsiElement(ElementType.DART_CODE,dartCode)
+}
+
+
 /**
 //         ~.psi.KtClassBody (CLASS_BODY)
 //           ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class OverrideModifierRuleTest {
     @Test
-    fun `change val keyword to final keyword`() {
+    fun `substitute override modifier with Dart ovveride anntation`() {
         val code =
             """
             interface MyInterface {
@@ -36,13 +36,15 @@ class OverrideModifierRuleTest {
 
 
             class MyClass : MyInterface {
-                @Override
+                @override
                 fun toString() = "MyClass"
-                override fun someFun() {
+                 @override
+                 fun someFun() {
                     print("hi!")
                 }
+                 @override
 
-                override val zero: Int
+                 val zero: Int
                     get() = 0
             }
 """.trimIndent()
