@@ -13,10 +13,12 @@ the [kt_dart package](https://pub.dev/packages/kt_dart), in other words, ``kt.da
 the produced code.
 
 ## What it is not good for
-Code containing low level async code (low level coroutine builders like ``suspendCoroutine`` ) should be
+- Code containing low level async code (low level coroutine builders like ``suspendCoroutine`` ) should be
 definitely being translated manually. Also, extra care should be put in methods transformed
 from ``suspend`` methods to ``async`` functions, that all calls to ``suspend`` functions 
 must be prefixed with ``await``. Currently, this is not done automatically.
+- Class constructors syntax is very different in Dart, and only translation of basic kotlin primary
+  constructor is supported. Most of constructor declration code would be probably need manual translation.
 
 ## Building k2dart
 First clone this repository.
@@ -33,7 +35,16 @@ will copy the jar file to this directory and rename it ``k2dart.jar``
   You should put it in the [k2dart-executables/test_code](./k2dart-executables/test_code) directory. See the other files in this directory
   for examples.
 - Next run ``k2dart`` to just output the Abstract Syntax Tree (AST) for the code you have written.
-  ``` java -jar .\k2dart.jar --print-ast  "test_code\<filename>.kts" >.\ast\<filename>_ast.txt```
+ 
+  ```
+  java -jar .\k2dart.jar --print-ast  "test_code\<filename>.kts" >test_code\<filename>_ast.txt
+  ```
+ 
+   you can also use the batch script in the same directory ``k2dart_print_ast``
+
+  ```
+  .\k2dart_printast.bat .\test_code\<filename>.kts
+  ```
 - Once you have the AST of the code with syntax you want to support, you can analyze it to understand how
  to write a new k2dart rule to support it.
 - For writing a new k2dart rule, it is best to start by copying an existing rule from the [rules directory](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/rules)
@@ -70,7 +81,17 @@ Note that ordered defined by priority will override order of rules defined by ``
 - For each new rule you define, define also a test class in [test](./ktlint-ruleset-k2dart/src/test/kotlin/com/beyondeye/k2dart)
 directory see for example [this test class](ktlint-ruleset-k2dart/src/test/kotlin/com/beyondeye/k2dart/BasicTypeNamesRuleTest.kt).
 
- ## Contributing
+  - There is a kotlin script that automate generating the boilerplate code for new rule, a test class for it and linking it in the
+    ``K2DartRuleSetProvider.kt``. It assumes that you already have a test kotlin code file. To run it you need
+    to have the kotlin cli compiler in the [kotlinc](./kotlinc) directory. See [here](./kotlinc/installing_kotlinc.md) on
+    instructions on how to install it. Once you have ``kotlinc`` installed cd back to the 
+    [k2dart-executables](./k2dart-executables) directory. and run
+    ```
+    .\generate_new_rule_boilerplate.bat .\test_code\<test_code_filename>.kts
+    ```
+    The new generated rule name will be equal to ``<test_code_filename>``
+
+## Contributing
 Writing additional rules to handle transpiling of code that is not currently supported are welcome.
 
 Writing rules is not very difficult. Just take a look at the existing rules to have an idea of how 
