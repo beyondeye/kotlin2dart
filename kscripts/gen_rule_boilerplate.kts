@@ -134,6 +134,7 @@ var testTxt=readFileToString(template_test_file_path)
 testTxt=testTxt.replace("FinalInsteadOfValRuleTest",new_rule_test_name)
 testTxt=replaceCodeSnippet(testTxt,"val code =",snippet)
 testTxt=replaceCodeSnippet(testTxt,"val formattedCode =",snippet)
+testTxt=testTxt.replace("listOf(FinalInsteadOfValRule())","listOf($new_rule_name())")
 
 newrule_test_file_path.toFile().writeText(testTxt, Charsets.UTF_8)
 
