@@ -33,5 +33,7 @@ public class K2DartRuleSetProvider :
             //RuleProvider { FinalInsteadOfValRule() },
             RuleProvider { VariableTypeBeforeNameRule() },
             RuleProvider { FunDeclarationSyntaxRule() },
+            RuleProvider { VisibilityModifiersRule() },
+
         )
 }
