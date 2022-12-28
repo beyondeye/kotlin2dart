@@ -20,4 +20,4 @@ set fileextension=%%~xi
 
 @echo on
 
-..\kotlinc\bin\kotlinc -script _gen_rule_boilerplate.kts -- -d "%arg1%"
+..\kotlinc\bin\kotlinc -script ..\kscripts\gen_rule_boilerplate.kts -- -d "%arg1%"
