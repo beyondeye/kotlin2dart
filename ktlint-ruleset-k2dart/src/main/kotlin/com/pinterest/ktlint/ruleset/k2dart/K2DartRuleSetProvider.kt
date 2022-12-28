@@ -23,6 +23,10 @@ public class K2DartRuleSetProvider :
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
             /**
+             * this rule should be run quite early to make it easier for further rule to work
+             */
+            RuleProvider( 2) { VisibilityModifiersRule() },
+            /**
              * this rule should run before VariableTypeBeforeNameRule so we assign to it higher priority
              */
             RuleProvider(1) { ClassPrimaryConstructorRule() },
@@ -33,7 +37,6 @@ public class K2DartRuleSetProvider :
             //RuleProvider { FinalInsteadOfValRule() },
             RuleProvider { VariableTypeBeforeNameRule() },
             RuleProvider { FunDeclarationSyntaxRule() },
-            RuleProvider { VisibilityModifiersRule() },
 
         )
 }
