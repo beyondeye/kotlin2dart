@@ -1,4 +1,4 @@
-16:45:44.185 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\stdops\bits_ops.kts
+09:35:45.306 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\stdops\bits_ops.kts
  1: ~.psi.KtFile (FILE)
  1:   ~.psi.KtPackageDirective (PACKAGE_DIRECTIVE) ""
  1:   ~.psi.KtImportList (IMPORT_LIST) ""
@@ -110,15 +110,17 @@
  9:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  9:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "g"
  9:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
- 9:             ~.psi.KtCallExpression (CALL_EXPRESSION)
- 9:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "inv"
- 9:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
- 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
- 9:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
- 9:                   ~.psi.KtConstantExpression (INTEGER_CONSTANT)
- 9:                     ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "8"
- 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 9:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 9:             ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 9:               ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "8"
+ 9:               ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 9:               ~.psi.KtCallExpression (CALL_EXPRESSION)
+ 9:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "inv"
+ 9:                 ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
  9:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
 10:           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
 10:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
