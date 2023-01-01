@@ -23,6 +23,12 @@ public class K2DartRuleSetProvider :
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
             /**
+             * this is a very simple rule and we want to run it early so that other rules that manipulate type are
+             * easier to implement, if we assume we don't need to maintain the exact AST tree structure that is output by
+             * the kotlin compiler
+             */
+            RuleProvider(3) { BasicTypesNamesRule() },
+            /**
              * this rule should be run quite early to make it easier for further rule to work
              */
             RuleProvider( 2) { VisibilityModifiersRule() },
@@ -30,8 +36,11 @@ public class K2DartRuleSetProvider :
              * this rule should run before VariableTypeBeforeNameRule so we assign to it higher priority
              */
             RuleProvider(1) { ClassPrimaryConstructorRule() },
+            /**
+             * this rule should be run before FunDeclarationSyntaxRule
+             */
+            RuleProvider(1) { FutureInsteadOfSuspendRule() },
             RuleProvider { SemicolonAtEndOfStatementsRule() },
-            RuleProvider { BasicTypesNamesRule() },
             RuleProvider { NumericalLiteralsRule() },
             //*dario* FinalInsteadOfValRule rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
             //RuleProvider { FinalInsteadOfValRule() },
@@ -39,7 +48,6 @@ public class K2DartRuleSetProvider :
             RuleProvider { FunDeclarationSyntaxRule() },
             RuleProvider { OverrideModifierRule() },
             RuleProvider { BitOpsRule() },
-            RuleProvider { FutureInsteadOfSuspendRule() },
 
 
         )

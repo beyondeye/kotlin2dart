@@ -10,3 +10,7 @@ suspend fun fun2()=12
 suspend fun anotherAsyncFun():Int {
     return 1
 }
+
+suspend fun yetAnotherAsyncFun():List<A> {
+    return 1
+}

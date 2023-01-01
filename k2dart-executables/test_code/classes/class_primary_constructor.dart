@@ -1,4 +1,4 @@
-class A/* (val a:String,var b:Int) */
+class A/* (val a:String,var b:int) */
 {
 final String a;
 int b;
@@ -6,7 +6,7 @@ int b;
 A(this.a,this.b,);
 }
 
-class B/* (val c:String,var d:Double) */
+class B/* (val c:String,var d:double) */
 {
 
 final String c;

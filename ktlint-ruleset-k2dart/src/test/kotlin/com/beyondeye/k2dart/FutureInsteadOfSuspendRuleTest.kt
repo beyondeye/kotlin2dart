@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class FutureInsteadOfSuspendRuleTest {
     @Test
-    fun `change val keyword to final keyword`() {
+    fun `comment out suspend keyword and change return type to future`() {
         val code =
             """
             class A
@@ -27,14 +27,14 @@ class FutureInsteadOfSuspendRuleTest {
             """
             class A
 
-            suspend fun fun1():A
+            /* suspend */ fun fun1():Future<A>
             {
                 return A()
             }
 
-            suspend fun fun2()=12
+            /* suspend */ fun fun2():Future<Object> =12
 
-            suspend fun anotherAsyncFun():Int {
+            /* suspend */ fun anotherAsyncFun():Future<Int> {
                 return 1
             }
             """.trimIndent()

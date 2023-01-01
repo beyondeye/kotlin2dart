@@ -1,5 +1,5 @@
 class SomeClass;
-class SomeOtherClass/* (val a:Double, val b:String) */
+class SomeOtherClass/* (val a:double, val b:String) */
 {
 final double a;
 final String b;

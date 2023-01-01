@@ -1,4 +1,4 @@
-10:20:32.549 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\async\future_instead_of_suspend.kts
+09:09:16.400 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\async\future_instead_of_suspend.kts
  1: ~.psi.KtFile (FILE)
  1:   ~.psi.KtPackageDirective (PACKAGE_DIRECTIVE) ""
  1:   ~.psi.KtImportList (IMPORT_LIST) ""
@@ -80,7 +80,42 @@
 11:               ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "1"
 11:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
 12:           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
-12:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+12:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n"
+14:       ~.psi.KtNamedFunction (FUN)
+14:         ~.psi.KtDeclarationModifierList (MODIFIER_LIST)
+14:           ~.c.i.p.impl.source.tree.LeafPsiElement (SUSPEND_KEYWORD) "suspend"
+14:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+14:         ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
+14:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+14:         ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "yetAnotherAsyncFun"
+14:         ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+14:           ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+14:           ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+14:         ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+14:         ~.psi.KtTypeReference (TYPE_REFERENCE)
+14:           ~.psi.KtUserType (USER_TYPE)
+14:             ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+14:               ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "List"
+14:             ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
+14:               ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
+14:               ~.psi.KtTypeProjection (TYPE_PROJECTION)
+14:                 ~.psi.KtTypeReference (TYPE_REFERENCE)
+14:                   ~.psi.KtUserType (USER_TYPE)
+14:                     ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+14:                       ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "A"
+14:               ~.c.i.p.impl.source.tree.LeafPsiElement (GT) ">"
+14:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+14:         ~.psi.KtBlockExpression (BLOCK)
+14:           ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+14:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+15:           ~.psi.KtReturnExpression (RETURN)
+15:             ~.c.i.p.impl.source.tree.LeafPsiElement (RETURN_KEYWORD) "return"
+15:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+15:             ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+15:               ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "1"
+15:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+16:           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+16:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
 
     format: <line_number:> <node.psi::class> (<node.elementType>) "<node.text>"
     legend: ~ = org.jetbrains.kotlin, c.i.p = com.intellij.psi
