@@ -1,8 +1,3 @@
-/**
- * Aaaaa
- * bbbbb
- * ccccc
- */
 open class A(
     /**
      * sssss
