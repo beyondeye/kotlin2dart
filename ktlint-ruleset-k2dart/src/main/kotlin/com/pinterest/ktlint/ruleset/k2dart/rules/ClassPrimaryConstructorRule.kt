@@ -13,11 +13,16 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.TreeElement
+import org.jetbrains.kotlin.com.intellij.psi.tree.TokenSet
 import org.jetbrains.kotlin.psi.psiUtil.children
 
 //
 public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
+        private val valvarTokenSet = TokenSet.create(
+            ElementType.VAL_KEYWORD,
+            ElementType.VAR_KEYWORD)
+
         public const val ruleName:String="class-primary-constr"
         //             ~.psi.KtParameter (VALUE_PARAMETER)
         //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
@@ -29,7 +34,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         //                   ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
         //                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
         private fun fieldDeclFromConstructorParameter(p: ASTNode): ASTNode? {
-            val valOrVarNode= p.firstChildNode ?: return  null
+            val valOrVarNode= p.findChildByType(valvarTokenSet)?: return  null
             if(valOrVarNode !is LeafPsiElement) return  null
             var isVar=false
             var isVal=false
@@ -98,10 +103,10 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
 
         if (node.isDartNode()) return
         //we are going to process the valueParamListNode and then remove it
-        val valueParamListNode =node.firstChildNode ?: return
+        val valueParamListNode =node.firstChildNode ?: return //
         if(valueParamListNode izNot ElementType.VALUE_PARAMETER_LIST)  return
         //note: that nextPar is not assigned an actual parameter, only after call to nextSibling it will contain it
-        var nextPar=valueParamListNode.firstChildNode
+        var nextPar=valueParamListNode.firstChildNode //
         val extractedParams= mutableListOf<ASTNode>()
         while(nextPar!=null)  {
             nextPar=nextPar.nextSibling { it iz ElementType.VALUE_PARAMETER }
@@ -117,7 +122,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
             val crAfterPrimaryConstructorNode =node.treeParent.addNewlineAfter(node)
             node.treeParent.addChildAfter(crAfterPrimaryConstructorNode, classBodyNode)
         }
-        val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace
+        val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace //
 
         //now move parameter declarations inside class body
         var prev=callBodyNodeFirstChildInside
