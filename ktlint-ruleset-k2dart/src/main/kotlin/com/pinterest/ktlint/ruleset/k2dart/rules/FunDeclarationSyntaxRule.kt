@@ -59,10 +59,7 @@ public class FunDeclarationSyntaxRule : Rule("$k2dartRulesetId:$ruleName") {
 
         if (node.isDartNode()) return
         //find the "fun" keyword node, we will substitute it with return type specification
-        var funKeywordNode =node.firstChildNode ?: return
-        if(funKeywordNode izNot ElementType.FUN_KEYWORD) {
-            funKeywordNode= funKeywordNode.nextSibling { it iz ElementType.FUN_KEYWORD } ?: return
-        }
+        var funKeywordNode =node.findChildByType(ElementType.FUN_KEYWORD) ?: return
 
         val parameterListNode=funKeywordNode.nextSibling { it iz ElementType.VALUE_PARAMETER_LIST } ?:return
         //TODO instead of colonNode it is possible to have an = node that must be substituted with =>
