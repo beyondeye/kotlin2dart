@@ -45,8 +45,6 @@ public class CompanionObjectRule : Rule("$k2dartRulesetId:$ruleName") {
             val companionNode=modListNode.findChildByType(ElementType.COMPANION_KEYWORD)
             isCompanion = companionNode!=null
         }
-        //TODO implement handling of object declaration that is not a companion object
-        if(!isCompanion) return
 
         val classBodyNode = objectNode.findChildByType( ElementType.CLASS_BODY ) ?:return
         //now loop over properties and named functions that are children of class body and moved then before
@@ -63,6 +61,8 @@ public class CompanionObjectRule : Rule("$k2dartRulesetId:$ruleName") {
             }
             nextChild=nextChild.nextCodeSibling()
         }
+        //if this is not a companion object but instead a regular object keep the code where it is don't move it
+        if(!isCompanion) return
 
         if(listOfChildrenToMove.isEmpty()) return
         //the node before which we will move the static definition
