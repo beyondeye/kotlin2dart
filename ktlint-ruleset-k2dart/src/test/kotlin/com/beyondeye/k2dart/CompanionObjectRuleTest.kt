@@ -10,32 +10,32 @@ class CompanionObjectRuleTest {
     fun `companion object members transformed into static members`() {
         val code =
             """
-class A
-{
-    val a=1;
-    fun someFun():Int {return 1}
-    companion object {
-        const val someConst:Int=123
-        private fun someStaticFun():Int { return  1 }
-        fun someOtherStaticFun() = "hello"
-        var someVariable:String="userid"
-    }
-}
-""".trimIndent()
+            class A
+            {
+                val a=1;
+                fun someFun():Int {return 1}
+                companion object {
+                    const val someConst:Int=123
+                    private fun someStaticFun():Int { return  1 }
+                    fun someOtherStaticFun() = "hello"
+                    var someVariable:String="userid"
+                }
+            }
+            """.trimIndent()
         val formattedCode =
             """
-class A
-{
-    val a=1;
-    fun someFun():Int {return 1}
-    companion object {
-        const val someConst:Int=123
-        private fun someStaticFun():Int { return  1 }
-        fun someOtherStaticFun() = "hello"
-        var someVariable:String="userid"
-    }
-}
-""".trimIndent()
+            class A
+            {
+                val a=1;
+                fun someFun():Int {return 1}
+                companion object {
+                    const val someConst:Int=123
+                    private fun someStaticFun():Int { return  1 }
+                    fun someOtherStaticFun() = "hello"
+                    var someVariable:String="userid"
+                }
+            }
+            """.trimIndent()
         val actualFormattedCode = runRulesOnCodeFragment(code, listOf(CompanionObjectRule()))
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
     }
