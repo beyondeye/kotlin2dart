@@ -1,0 +1,137 @@
+08:39:48.296 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\classes\companion_object.kts
+ 1: ~.psi.KtFile (FILE)
+ 1:   ~.psi.KtPackageDirective (PACKAGE_DIRECTIVE) ""
+ 1:   ~.psi.KtImportList (IMPORT_LIST) ""
+ 1:   ~.psi.KtScript (SCRIPT)
+ 1:     ~.psi.KtBlockExpression (BLOCK)
+ 1:       ~.psi.KtClass (CLASS)
+ 1:         ~.c.i.p.impl.source.tree.LeafPsiElement (CLASS_KEYWORD) "class"
+ 1:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 1:         ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "A"
+ 1:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+ 2:         ~.psi.KtClassBody (CLASS_BODY)
+ 2:           ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+ 2:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+ 3:           ~.psi.KtProperty (PROPERTY)
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+ 3:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "a"
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 3:             ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+ 3:               ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "1"
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (SEMICOLON) ";"
+ 3:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+ 4:           ~.psi.KtNamedFunction (FUN)
+ 4:             ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
+ 4:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 4:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "someFun"
+ 4:             ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+ 4:               ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 4:               ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 4:             ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+ 4:             ~.psi.KtTypeReference (TYPE_REFERENCE)
+ 4:               ~.psi.KtUserType (USER_TYPE)
+ 4:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 4:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Int"
+ 4:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 4:             ~.psi.KtBlockExpression (BLOCK)
+ 4:               ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+ 4:               ~.psi.KtReturnExpression (RETURN)
+ 4:                 ~.c.i.p.impl.source.tree.LeafPsiElement (RETURN_KEYWORD) "return"
+ 4:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 4:                 ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+ 4:                   ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "1"
+ 4:               ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+ 4:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+ 5:           ~.psi.KtObjectDeclaration (OBJECT_DECLARATION)
+ 5:             ~.psi.KtDeclarationModifierList (MODIFIER_LIST)
+ 5:               ~.c.i.p.impl.source.tree.LeafPsiElement (COMPANION_KEYWORD) "companion"
+ 5:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 5:             ~.c.i.p.impl.source.tree.LeafPsiElement (OBJECT_KEYWORD) "object"
+ 5:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 5:             ~.psi.KtClassBody (CLASS_BODY)
+ 5:               ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+ 5:               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n        "
+ 6:               ~.psi.KtProperty (PROPERTY)
+ 6:                 ~.psi.KtDeclarationModifierList (MODIFIER_LIST)
+ 6:                   ~.c.i.p.impl.source.tree.LeafPsiElement (CONST_KEYWORD) "const"
+ 6:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+ 6:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "someConst"
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+ 6:                 ~.psi.KtTypeReference (TYPE_REFERENCE)
+ 6:                   ~.psi.KtUserType (USER_TYPE)
+ 6:                     ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 6:                       ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Int"
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 6:                 ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+ 6:                   ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "123"
+ 6:               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n        "
+ 7:               ~.psi.KtNamedFunction (FUN)
+ 7:                 ~.psi.KtDeclarationModifierList (MODIFIER_LIST)
+ 7:                   ~.c.i.p.impl.source.tree.LeafPsiElement (PRIVATE_KEYWORD) "private"
+ 7:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
+ 7:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "someStaticFun"
+ 7:                 ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+ 7:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 7:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+ 7:                 ~.psi.KtTypeReference (TYPE_REFERENCE)
+ 7:                   ~.psi.KtUserType (USER_TYPE)
+ 7:                     ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 7:                       ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Int"
+ 7:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:                 ~.psi.KtBlockExpression (BLOCK)
+ 7:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+ 7:                   ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:                   ~.psi.KtReturnExpression (RETURN)
+ 7:                     ~.c.i.p.impl.source.tree.LeafPsiElement (RETURN_KEYWORD) "return"
+ 7:                     ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "  "
+ 7:                     ~.psi.KtConstantExpression (INTEGER_CONSTANT)
+ 7:                       ~.c.i.p.impl.source.tree.LeafPsiElement (INTEGER_LITERAL) "1"
+ 7:                   ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+ 7:               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n        "
+ 8:               ~.psi.KtNamedFunction (FUN)
+ 8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
+ 8:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "someOtherStaticFun"
+ 8:                 ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+ 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 8:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 8:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 8:                 ~.psi.KtStringTemplateExpression (STRING_TEMPLATE)
+ 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (OPEN_QUOTE) """
+ 8:                   ~.psi.KtLiteralStringTemplateEntry (LITERAL_STRING_TEMPLATE_ENTRY)
+ 8:                     ~.c.i.p.impl.source.tree.LeafPsiElement (REGULAR_STRING_PART) "hello"
+ 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (CLOSING_QUOTE) """
+ 8:               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n        "
+ 9:               ~.psi.KtProperty (PROPERTY)
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
+ 9:                 ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "someVariable"
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+ 9:                 ~.psi.KtTypeReference (TYPE_REFERENCE)
+ 9:                   ~.psi.KtUserType (USER_TYPE)
+ 9:                     ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 9:                       ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "String"
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 9:                 ~.psi.KtStringTemplateExpression (STRING_TEMPLATE)
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (OPEN_QUOTE) """
+ 9:                   ~.psi.KtLiteralStringTemplateEntry (LITERAL_STRING_TEMPLATE_ENTRY)
+ 9:                     ~.c.i.p.impl.source.tree.LeafPsiElement (REGULAR_STRING_PART) "userid"
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (CLOSING_QUOTE) """
+ 9:               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+10:               ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+10:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+11:           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+11:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+
+    format: <line_number:> <node.psi::class> (<node.elementType>) "<node.text>"
+    legend: ~ = org.jetbrains.kotlin, c.i.p = com.intellij.psi
+
