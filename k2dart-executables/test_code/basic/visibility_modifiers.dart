@@ -1,4 +1,4 @@
-/* private */ val a=1;
+/* private */ final a=1;
  /* protected */
 
  void someProtectedFun() {
@@ -7,7 +7,7 @@
  /* internal */
  class A {
      /* private */
-     val a=1;
+     final a=1;
      /* protected */
      void fn() {
         print("hello");

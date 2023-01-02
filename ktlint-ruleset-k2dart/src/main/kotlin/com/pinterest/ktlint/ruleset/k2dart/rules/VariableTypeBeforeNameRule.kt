@@ -11,6 +11,7 @@ import com.pinterest.ktlint.core.ast.nextCodeSibling
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
+import org.jetbrains.kotlin.com.intellij.psi.tree.TokenSet
 
 
 public class VariableTypeBeforeNameRule : Rule("$k2dartRulesetId:$ruleName") {
@@ -33,7 +34,11 @@ public class VariableTypeBeforeNameRule : Rule("$k2dartRulesetId:$ruleName") {
         //        ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
         //          ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
         if(node izNot  ElementType.PROPERTY) return
-        var varvalKeywordNode=node.firstChildNode
+        val valvarTokenSet = TokenSet.create(
+            ElementType.VAL_KEYWORD,
+            ElementType.VAR_KEYWORD)
+
+        var varvalKeywordNode=node.findChildByType(valvarTokenSet) ?: return
         var isVar=true
         if(varvalKeywordNode iz ElementType.VAL_KEYWORD) {
             isVar=false

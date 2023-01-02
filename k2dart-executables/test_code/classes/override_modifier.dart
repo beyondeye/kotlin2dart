@@ -13,6 +13,6 @@ class MyClass : MyInterface {
     }
      @override
 
-     val zero: int
+     final int zero 
         get() = 0;
 }
