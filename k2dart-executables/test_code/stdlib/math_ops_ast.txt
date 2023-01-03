@@ -1,0 +1,173 @@
+15:36:47.477 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\stdlib\math_ops.kts
+ 1: ~.psi.KtFile (FILE)
+ 1:   ~.psi.KtPackageDirective (PACKAGE_DIRECTIVE) ""
+ 1:   ~.psi.KtImportList (IMPORT_LIST)
+ 1:     ~.psi.KtImportDirective (IMPORT_DIRECTIVE)
+ 1:       ~.c.i.p.impl.source.tree.LeafPsiElement (IMPORT_KEYWORD) "import"
+ 1:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 1:       ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 1:         ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 1:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 1:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "kotlin"
+ 1:           ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 1:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 1:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "math"
+ 1:         ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 1:         ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 1:           ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "ceil"
+ 1:     ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+ 2:     ~.psi.KtImportDirective (IMPORT_DIRECTIVE)
+ 2:       ~.c.i.p.impl.source.tree.LeafPsiElement (IMPORT_KEYWORD) "import"
+ 2:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 2:       ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 2:         ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 2:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 2:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "kotlin"
+ 2:           ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 2:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 2:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "math"
+ 2:         ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 2:         ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 2:           ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "round"
+ 2:     ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+ 3:     ~.psi.KtImportDirective (IMPORT_DIRECTIVE)
+ 3:       ~.c.i.p.impl.source.tree.LeafPsiElement (IMPORT_KEYWORD) "import"
+ 3:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 3:       ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 3:         ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 3:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "kotlin"
+ 3:           ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 3:           ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 3:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "math"
+ 3:         ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 3:         ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 3:           ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "abs"
+ 3:   ~.psi.KtScript (SCRIPT)
+ 3:     ~.psi.KtBlockExpression (BLOCK)
+ 3:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n"
+ 5:       ~.psi.KtNamedFunction (FUN)
+ 5:         ~.c.i.p.impl.source.tree.LeafPsiElement (FUN_KEYWORD) "fun"
+ 5:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 5:         ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "main"
+ 5:         ~.psi.KtParameterList (VALUE_PARAMETER_LIST)
+ 5:           ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 5:           ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 5:         ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 5:         ~.psi.KtBlockExpression (BLOCK)
+ 5:           ~.c.i.p.impl.source.tree.LeafPsiElement (LBRACE) "{"
+ 5:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+ 6:           ~.psi.KtProperty (PROPERTY)
+ 6:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+ 6:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 6:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "a1"
+ 6:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 6:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 6:             ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 6:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Math"
+ 6:               ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 6:               ~.psi.KtCallExpression (CALL_EXPRESSION)
+ 6:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 6:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "round"
+ 6:                 ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+ 6:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 6:                   ~.psi.KtValueArgument (VALUE_ARGUMENT)
+ 6:                     ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+ 6:                       ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "1.2"
+ 6:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 6:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+ 7:           ~.psi.KtProperty (PROPERTY)
+ 7:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+ 7:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "a2"
+ 7:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 7:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 7:             ~.psi.KtCallExpression (CALL_EXPRESSION)
+ 7:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "round"
+ 7:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 7:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
+ 7:                   ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+ 7:                     ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "1.2"
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 7:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n    "
+ 9:           ~.psi.KtProperty (PROPERTY)
+ 9:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+ 9:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 9:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "b1"
+ 9:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+ 9:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+ 9:             ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+ 9:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Math"
+ 9:               ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+ 9:               ~.psi.KtCallExpression (CALL_EXPRESSION)
+ 9:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "ceil"
+ 9:                 ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+ 9:                   ~.psi.KtValueArgument (VALUE_ARGUMENT)
+ 9:                     ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+ 9:                       ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "2.3"
+ 9:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+ 9:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+10:           ~.psi.KtProperty (PROPERTY)
+10:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+10:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+10:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "b2"
+10:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+10:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+10:             ~.psi.KtCallExpression (CALL_EXPRESSION)
+10:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "ceil"
+10:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+10:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
+10:                   ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+10:                     ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "2.3"
+10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+10:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n\n    "
+12:           ~.psi.KtProperty (PROPERTY)
+12:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+12:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+12:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "c1"
+12:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+12:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+12:             ~.psi.KtDotQualifiedExpression (DOT_QUALIFIED_EXPRESSION)
+12:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+12:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Math"
+12:               ~.c.i.p.impl.source.tree.LeafPsiElement (DOT) "."
+12:               ~.psi.KtCallExpression (CALL_EXPRESSION)
+12:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+12:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "abs"
+12:                 ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+12:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+12:                   ~.psi.KtValueArgument (VALUE_ARGUMENT)
+12:                     ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+12:                       ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "3.4"
+12:                   ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+12:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n    "
+13:           ~.psi.KtProperty (PROPERTY)
+13:             ~.c.i.p.impl.source.tree.LeafPsiElement (VAL_KEYWORD) "val"
+13:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+13:             ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "c2"
+13:             ~.c.i.p.impl.source.tree.LeafPsiElement (EQ) "="
+13:             ~.psi.KtCallExpression (CALL_EXPRESSION)
+13:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+13:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "abs"
+13:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
+13:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
+13:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
+13:                   ~.psi.KtConstantExpression (FLOAT_CONSTANT)
+13:                     ~.c.i.p.impl.source.tree.LeafPsiElement (FLOAT_LITERAL) "3.4"
+13:                 ~.c.i.p.impl.source.tree.LeafPsiElement (RPAR) ")"
+13:           ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+14:           ~.c.i.p.impl.source.tree.LeafPsiElement (RBRACE) "}"
+14:       ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) "\n"
+
+    format: <line_number:> <node.psi::class> (<node.elementType>) "<node.text>"
+    legend: ~ = org.jetbrains.kotlin, c.i.p = com.intellij.psi
+
