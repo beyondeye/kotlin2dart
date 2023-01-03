@@ -5,9 +5,9 @@ import com.pinterest.ktlint.ruleset.k2dart.utils.asDartNode
 import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.ElementType
-import com.pinterest.ktlint.core.ast.iz
+import com.pinterest.ktlint.core.ast.izNot
+import com.pinterest.ktlint.core.ast.nextCodeSibling
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
-import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 
 // FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
 // but we keep it here because we use it as template for generating new rules
@@ -21,11 +21,16 @@ public class IsEmptyRule : Rule("$k2dartRulesetId:$ruleName") {
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> Unit,
     ) {
         if(node.isDartNode()) return
-        if (node iz ElementType.VAL_KEYWORD) {
-            //*DARIO* emit is useless in k2dart, unless we want to write some log of what is corrected (useful for debugging)
-            // emit(node.startOffset, ruleName, true)
-            val newNode=(node as LeafElement).replaceWithText("final")  //update the AST with the converted keyword
-            newNode.asDartNode() //set also the dart node flag so that we will avoid processing this node again
-        }
+        if (node izNot ElementType.IDENTIFIER) return
+        val identifierName=node.text
+        if(identifierName != "isEmpty" && identifierName!="isNotEmpty") return
+        val refExprNode = node.treeParent
+        if(refExprNode izNot  ElementType.REFERENCE_EXPRESSION) return
+        val argListNode=refExprNode.nextCodeSibling()
+        if(argListNode izNot ElementType.VALUE_ARGUMENT_LIST) return
+        if(argListNode!!.text!="()") return //not empty arg list
+        //ok so we have identified a call to isEmpty/isNotEmpty: remove the arglist to transform it in a property
+        argListNode.treeParent.removeChild(argListNode)
+        node.asDartNode()
     }
 }
