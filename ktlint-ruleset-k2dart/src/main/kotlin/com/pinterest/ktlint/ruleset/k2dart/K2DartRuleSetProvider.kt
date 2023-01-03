@@ -57,5 +57,6 @@ public class K2DartRuleSetProvider :
             RuleProvider { OverrideModifierRule() },
             RuleProvider { BitOpsRule() },
             RuleProvider { NullOpsRule() },
+            RuleProvider { IsEmptyRule() },
         )
 }
