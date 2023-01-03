@@ -32,6 +32,10 @@ public class SemicolonAtEndOfStatementsRule : Rule("$k2dartRulesetId:$ruleName")
             //is this a nested call?
             if(node.treeParent izNot ElementType.BLOCK) return
             needToAddSemicolon=true
+        } else if(node iz ElementType.SCRIPT_INITIALIZER) {
+            //do we already have a semicolon?
+            if(node.nextCodeSibling()?.elementType==ElementType.SEMICOLON) return
+            needToAddSemicolon=true
         }
         if(needToAddSemicolon) {
             //*DARIO* emit is useless in k2dart, unless we want to write some log of what is corrected (useful for debugging)
