@@ -56,8 +56,6 @@ public class K2DartRuleSetProvider :
             RuleProvider { FunDeclarationSyntaxRule() },
             RuleProvider { OverrideModifierRule() },
             RuleProvider { BitOpsRule() },
-
-
-
+            RuleProvider { NullOpsRule() },
         )
 }
