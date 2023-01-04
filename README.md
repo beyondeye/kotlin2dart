@@ -62,7 +62,7 @@ must be prefixed with ``await``. Currently, this is not done automatically.
   ```
 - Once you have the AST of the code with syntax you want to support, you can analyze it to understand how
  to write a new k2dart rule to support it.
-- There is a kotlin script that automate generating the boilerplate code for a new rule, a test class for it and linking it in the
+- There is a kotlin script that automates generating the boilerplate code for a new rule, a test class for it and linking it in the
   [``K2DartRuleSetProvider.kt``](./ktlint-ruleset-k2dart/src/main/kotlin/com/pinterest/ktlint/ruleset/k2dart/K2DartRuleSetProvider.kt). 
   It assumes that you already have a test kotlin code file, somewhere in the [``test_code``](./k2dart-executables/test_code) directory or subdirectory.
   To run it you need to have the kotlin CLI compiler installed in the [kotlinc](./kotlinc) directory. See [here](./kotlinc/installing_kotlinc.md) on
@@ -77,7 +77,7 @@ The new generated rule name will be equal to ``<test_code_filename>``
 For writing a new k2dart rule, it is best to start by copying an existing rule from the [rules directory](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/rules)
 - in the [ktlint-ruleset-k2dart](./ktlint-ruleset-k2dart) module, and add it in the same directory. You also have to add the new rule
 to the ``k2dart`` [ruleset file](./ktlint-ruleset-k2dart/src/main/kotlin/com/beyondeye/k2dart/CustomRuleSetProvider.kt) in ``getRuleProviders()`` method. Note that unlike in the original ``ktlint`` each rule
-is associated with a priority that determine the execution order of the rule (higher priority: rule execute earlier). Default priority, if not specified, is zero. An alternative way
+is associated with a priority that determine the execution order of the rule (higher priority: rule executes earlier). Default priority, if not specified, is zero. An alternative way
 to estabilish dependency in execution order between rules, that is also used in the original ktlint, is to define
 the ``visitorModifiers`` argument in the constructor of ``Rule`` with the list of dependency, for example
 ```kotlin
