@@ -13,10 +13,15 @@ class MathOpsRuleTest {
             import kotlin.math.ceil
             import kotlin.math.round
             import kotlin.math.abs
+            import kotlin.math.roundToInt
 
             fun main() {
                 val a1= Math.round(1.2)
                 val a2 = round(1.2)
+                val a3 = c2.roundToInt()
+                val a4 = (1.2+c2).roundToInt()
+                val a5 = Math.abs(1.0+(1.2+c2).roundToInt())
+                val a6 = (1.0+(1.2+c2).roundToInt())/2.0
 
                 val b1= Math.ceil(2.3)
                 val b2= ceil(2.3)
@@ -30,16 +35,21 @@ class MathOpsRuleTest {
             import kotlin.math.ceil
             import kotlin.math.round
             import kotlin.math.abs
+            import kotlin.math.roundToInt
 
             fun main() {
-                val a1= Math.round(1.2)
-                val a2 = round(1.2)
+                val a1= (1.2).round()
+                val a2 = (1.2).round()
+                val a3 = c2.roundToInt()
+                val a4 = (1.2+c2).roundToInt()
+                val a5 = (1.0+(1.2+c2).roundToInt()).abs()
+                val a6 = (1.0+(1.2+c2).roundToInt())/2.0
 
-                val b1= Math.ceil(2.3)
-                val b2= ceil(2.3)
+                val b1= (2.3).ceil()
+                val b2= (2.3).ceil()
 
-                val c1= Math.abs(3.4)
-                val c2=abs(3.4)
+                val c1= (3.4).abs()
+                val c2=(3.4).abs()
             }
             """.trimIndent()
         val actualFormattedCode = runRulesOnCodeFragment(code, listOf(MathOpsRule()))
