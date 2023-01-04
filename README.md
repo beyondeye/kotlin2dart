@@ -6,7 +6,7 @@ It was not designed to be a complete transpiler, but instead to facilitate manua
 The output Dart code is most cases will not be actual valid Dart code. The purpose is instead to make it easier and faster
 for a programmer to complete the job of porting the code.
 
-For a guide on how different language construct compares in the two languages, see [kotlin is dart](https://beyondeye.github.io/kotlin_is_dart/)
+For a guide on how different language construct compares in the two languages, see [kotlin is dart](https://beyondeye.github.io/kotlin_is_dart/).
 
 For porting code that relies on kotlin standard libraries and collections, we rely on
 the [kt_dart package](https://pub.dev/packages/kt_dart), in other words, ``kt.dart`` will be a required dependency of
@@ -46,7 +46,7 @@ definitely being translated manually. Also, extra care should be put in methods 
 from ``suspend`` methods to ``async`` functions, that all calls to ``suspend`` functions 
 must be prefixed with ``await``. Currently, this is not done automatically.
 - Class constructors syntax is very different in Dart, and only translation of basic kotlin primary
-  constructor is supported. Most of constructor declration code would be probably need manual translation.
+  constructor is supported. Most constructor declaration code would be probably need manual translation.
 
 
 
@@ -62,12 +62,12 @@ must be prefixed with ``await``. Currently, this is not done automatically.
   ```
 - Once you have the AST of the code with syntax you want to support, you can analyze it to understand how
  to write a new k2dart rule to support it.
-  - There is a kotlin script that automate generating the boilerplate code for a new rule, a test class for it and linking it in the
-    [``K2DartRuleSetProvider.kt``](./ktlint-ruleset-k2dart/src/main/kotlin/com/pinterest/ktlint/ruleset/k2dart/K2DartRuleSetProvider.kt). 
-    It assumes that you already have a test kotlin code file, somewhere in the [``test_code``](./k2dart-executables/test_code) directory or subdirectory.
-    To run it you need to have the kotlin CLI compiler installed in the [kotlinc](./kotlinc) directory. See [here](./kotlinc/installing_kotlinc.md) on
-        instructions on how to install it. Once you have ``kotlinc`` installed ``cd`` to the
-        [k2dart-executables](./k2dart-executables) directory. and run
+- There is a kotlin script that automate generating the boilerplate code for a new rule, a test class for it and linking it in the
+  [``K2DartRuleSetProvider.kt``](./ktlint-ruleset-k2dart/src/main/kotlin/com/pinterest/ktlint/ruleset/k2dart/K2DartRuleSetProvider.kt). 
+  It assumes that you already have a test kotlin code file, somewhere in the [``test_code``](./k2dart-executables/test_code) directory or subdirectory.
+  To run it you need to have the kotlin CLI compiler installed in the [kotlinc](./kotlinc) directory. See [here](./kotlinc/installing_kotlinc.md) on
+      instructions on how to install it. Once you have ``kotlinc`` installed ``cd`` to the
+      [k2dart-executables](./k2dart-executables) directory. and run
 ```
 .\generate_new_rule_boilerplate.bat .\test_code\<test_code_filename>.kts
 ```
