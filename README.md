@@ -24,7 +24,7 @@ Then ``cd`` to the [k2dart-executables](./k2dart-executables) directory
 and run the [fetch_k2dart_executable.bat](./k2dart-executables/fetch_k2dart_executable.bat) script that
 will copy the jar file to this directory and rename it ``k2dart.jar``
 
-## Project File Structure
+## Project Directory Structure
 All the modules that come from the original ``ktlint`` project (directories whose names starts with 
 ``ktlint-``) are not probably going to be of interest, except for [ktlint-ruleset-k2dart](./ktlint-ruleset-k2dart) 
  that is actually a new module, not present in ``ktlint``, that contains the rules that are used to transform Kotlin code into Dart.
