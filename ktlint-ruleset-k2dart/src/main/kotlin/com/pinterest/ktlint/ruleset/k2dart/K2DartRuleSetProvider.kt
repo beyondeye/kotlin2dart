@@ -23,6 +23,13 @@ public class K2DartRuleSetProvider :
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
             /**
+             * this is a very simple rule that add an empty class body for classes that do not declare one
+             * it is required for many other rules like [ClassPrimaryConstructorRule], [DataClassesRule] to work
+             * and transform the AST that is compatible will all other rules, so we want to run it early
+             */
+            RuleProvider(4) { MissingClassBodyRule() },
+
+            /**
              * this is a very simple rule and we want to run it early so that other rules that manipulate type are
              * easier to implement, if we assume we don't need to maintain the exact AST tree structure that is output by
              * the kotlin compiler
