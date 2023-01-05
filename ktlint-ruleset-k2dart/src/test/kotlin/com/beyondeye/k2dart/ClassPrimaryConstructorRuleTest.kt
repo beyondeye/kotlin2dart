@@ -73,7 +73,23 @@ class ClassPrimaryConstructorRuleTest {
         val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
         Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
     }
+    @Test
+    fun `change syntax for primary constructor for data class with empty body`() {
+        val code =
+            """
+            data class B(val lst:List<A> = listOf()) {}
+            """.trimIndent()
+        val formattedCode =
+            """
+            data class B/* (val lst:List<A> = listOf()) */ {
+            val lst:List<A> = listOf()
 
-
+            B(this.lst,);
+            }
+            """.trimIndent()
+        val rulesToTest= listOf<Rule>(ClassPrimaryConstructorRule())
+        val actualFormattedCode = runRulesOnCodeFragment(code, rulesToTest)
+        Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
+    }
 }
 

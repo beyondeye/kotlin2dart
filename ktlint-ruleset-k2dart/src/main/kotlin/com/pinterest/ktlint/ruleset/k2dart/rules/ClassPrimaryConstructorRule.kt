@@ -128,8 +128,12 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
             node.treeParent.addChildAfter(classBodyNode, crAfterPrimaryConstructorNode)
         }
          */
-        val callBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)?.treeNext //skip lbrace
-
+        var callBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)!!.treeNext //skip lbrace
+        if(callBodyNodeFirstChildInside iz ElementType.RBRACE) { //empty body: add a new line
+            val newLineNode=PsiWhiteSpaceImpl("\n")
+            callBodyNodeFirstChildInside.treeParent.addChild(newLineNode,callBodyNodeFirstChildInside)
+            callBodyNodeFirstChildInside=newLineNode
+        }
         //now move parameter declarations inside class body
         var prev=callBodyNodeFirstChildInside
         for(p in extractedParams)
