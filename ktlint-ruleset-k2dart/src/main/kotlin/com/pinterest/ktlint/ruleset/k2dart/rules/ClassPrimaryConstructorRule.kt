@@ -12,16 +12,11 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.TreeElement
-import org.jetbrains.kotlin.com.intellij.psi.tree.TokenSet
 import org.jetbrains.kotlin.psi.psiUtil.children
 
 //
 public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
-        private val valvarTokenSet = TokenSet.create(
-            ElementType.VAL_KEYWORD,
-            ElementType.VAR_KEYWORD)
-
         public const val ruleName:String="class-primary-constr"
         //             ~.psi.KtParameter (VALUE_PARAMETER)
         //               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
@@ -102,17 +97,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
 
         if (node.isDartNode()) return
         //we are going to process the valueParamListNode and then remove it
-        val valueParamListNode =node.firstChildNode ?: return //
-        if(valueParamListNode izNot ElementType.VALUE_PARAMETER_LIST)  return
-        //note: that nextPar is not assigned an actual parameter, only after call to nextSibling it will contain it
-        var nextPar=valueParamListNode.firstChildNode //
-        val extractedParams= mutableListOf<ASTNode>()
-        while(nextPar!=null)  {
-            nextPar=nextPar.nextSibling { it iz ElementType.VALUE_PARAMETER }
-            if(nextPar!=null) {
-                extractedParams.add(nextPar)
-            }
-        }
+        val extractedParams= parseValueParameters(node) ?: return
         //now check if we have a class body
         //we should always have one thanks to the MissingClassBodyRule
         val classBodyNode=node.nextSibling{it iz ElementType.CLASS_BODY} ?:return
@@ -128,14 +113,9 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
             node.treeParent.addChildAfter(classBodyNode, crAfterPrimaryConstructorNode)
         }
          */
-        var callBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)!!.treeNext //skip lbrace
-        if(callBodyNodeFirstChildInside iz ElementType.RBRACE) { //empty body: add a new line
-            val newLineNode=PsiWhiteSpaceImpl("\n")
-            callBodyNodeFirstChildInside.treeParent.addChild(newLineNode,callBodyNodeFirstChildInside)
-            callBodyNodeFirstChildInside=newLineNode
-        }
+        var classBodyNodeFirstChildInside=findFirstChildInsideClassBody(classBodyNode)
         //now move parameter declarations inside class body
-        var prev=callBodyNodeFirstChildInside
+        var prev=classBodyNodeFirstChildInside
         for(p in extractedParams)
         {
             val fieldDeclarationNode=fieldDeclFromConstructorParameter(p) ?:continue

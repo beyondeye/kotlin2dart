@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiCommentImpl
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 import org.jetbrains.kotlin.com.intellij.psi.tree.IElementType
+import org.jetbrains.kotlin.com.intellij.psi.tree.TokenSet
 
 internal object K2Dart {
     val dartNodeKey= Key<Boolean>("*DRT*")
@@ -134,3 +135,34 @@ internal fun createEmptyClassBodyNode() : ASTNode {
     }
     return  classBodyNode
 }
+
+/**
+ * return list of of nodes of type [ElementType.VALUE_PARAMETER]
+ */
+internal fun parseValueParameters(node:ASTNode): MutableList<ASTNode>? {
+    val valueParamListNode =node.findChildByType(ElementType.VALUE_PARAMETER_LIST) ?: return null
+    //note: that nextPar is not assigned an actual parameter, only after call to nextSibling it will contain it
+    var nextPar=valueParamListNode.firstChildNode
+    val extractedParams= mutableListOf<ASTNode>()
+    while(nextPar!=null)  {
+        nextPar=nextPar.nextSibling { it iz ElementType.VALUE_PARAMETER }
+        if(nextPar!=null) {
+            extractedParams.add(nextPar)
+        }
+    }
+    return extractedParams
+}
+
+internal fun findFirstChildInsideClassBody(classBodyNode:ASTNode): ASTNode? {
+    var classBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)?.treeNext //skip lbrace
+    if(classBodyNodeFirstChildInside iz ElementType.RBRACE) { //empty body: add a new line
+        val newLineNode=PsiWhiteSpaceImpl("\n")
+        classBodyNodeFirstChildInside?.treeParent?.addChild(newLineNode,classBodyNodeFirstChildInside)
+        classBodyNodeFirstChildInside=newLineNode
+    }
+    return classBodyNodeFirstChildInside
+}
+
+internal val valvarTokenSet = TokenSet.create(
+    ElementType.VAL_KEYWORD,
+    ElementType.VAR_KEYWORD)

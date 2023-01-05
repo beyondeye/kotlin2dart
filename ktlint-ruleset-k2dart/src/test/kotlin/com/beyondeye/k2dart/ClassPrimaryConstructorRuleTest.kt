@@ -11,12 +11,11 @@ class ClassPrimaryConstructorRuleTest {
     fun `change syntax for primary constructor`() {
         val code =
             """
-            class A(val a:String,var b:Int)
+            class A(val a:String,var b:Int){}
             """.trimIndent()
         val formattedCode =
             """
-            class A/* (val a:String,var b:Int) */
-            {
+            class A/* (val a:String,var b:Int) */{
             val a:String
             var b:Int
 
