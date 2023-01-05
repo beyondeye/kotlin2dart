@@ -43,7 +43,7 @@ internal fun ASTNode.addChildAfter(nodeToAdd: ASTNode, addAfterNode: ASTNode?): 
 /**
  * same as [addChildAfter] for adding a newLine node
  */
-internal fun ASTNode.addNewlineAfter(addAfterNode:ASTNode?):ASTNode=
+internal fun ASTNode.addChildNewlineAfter(addAfterNode:ASTNode?):ASTNode=
     addChildAfter(PsiWhiteSpaceImpl("\n"), addAfterNode)
 
 /**

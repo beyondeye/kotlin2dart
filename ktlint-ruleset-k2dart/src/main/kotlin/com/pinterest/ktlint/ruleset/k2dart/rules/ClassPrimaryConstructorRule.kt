@@ -128,7 +128,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
             node.treeParent.addChildAfter(classBodyNode, crAfterPrimaryConstructorNode)
         }
          */
-        val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace //
+        val callBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)?.treeNext //skip lbrace
 
         //now move parameter declarations inside class body
         var prev=callBodyNodeFirstChildInside
@@ -147,9 +147,9 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         }
         dartConstructorStr +=");"
         val darConstructorNode=LeafPsiElement(ElementType.DART_CODE,dartConstructorStr)
-        prev= classBodyNode.addNewlineAfter(prev)
+        prev= classBodyNode.addChildNewlineAfter(prev)
         prev=classBodyNode.addChildAfter(darConstructorNode, prev)
-        prev= classBodyNode.addNewlineAfter(prev)
+        prev= classBodyNode.addChildNewlineAfter(prev)
 
         //finally convert the primary constructor code to a comment in case that we did not transpile it
         //correctly

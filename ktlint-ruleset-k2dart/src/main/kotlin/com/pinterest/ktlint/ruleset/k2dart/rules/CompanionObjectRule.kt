@@ -47,7 +47,7 @@ public class CompanionObjectRule : Rule("$k2dartRulesetId:$ruleName") {
         }
 
         val classBodyNode = objectNode.findChildByType( ElementType.CLASS_BODY ) ?:return
-        //now loop over properties and named functions that are children of class body and moved then before
+        //now loop over properties and named functions that are children of class body and moved them before
         //companion object declaration and and to them a "static" modifier
         val listOfChildrenToMove = mutableListOf<ASTNode>()
         var nextChild=classBodyNode.firstChildNode
