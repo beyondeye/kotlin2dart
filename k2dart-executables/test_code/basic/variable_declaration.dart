@@ -1,4 +1,7 @@
 class AClass
+{
+}
+
 
 void main(double arg1, double arg2,AClass arg3) {
     double a = 1.0;

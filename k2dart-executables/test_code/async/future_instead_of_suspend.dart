@@ -1,4 +1,7 @@
 class A
+{
+}
+
 
 /* suspend */ Future<A> fun1()
 {

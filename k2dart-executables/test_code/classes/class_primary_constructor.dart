@@ -6,6 +6,7 @@ int b;
 A(this.a,this.b,);
 }
 
+
 class B/* (val c:String,var d:double) */
 {
 
