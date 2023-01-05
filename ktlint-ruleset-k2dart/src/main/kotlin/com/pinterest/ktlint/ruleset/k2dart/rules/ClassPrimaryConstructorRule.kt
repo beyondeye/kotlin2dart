@@ -5,7 +5,6 @@ import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.*
 import com.pinterest.ktlint.ruleset.k2dart.utils.*
 import com.pinterest.ktlint.ruleset.k2dart.utils.addChildAfter
-import com.pinterest.ktlint.ruleset.k2dart.utils.createEmptyClassBodyNode
 import com.pinterest.ktlint.ruleset.k2dart.utils.getEnclosingClassName
 import com.pinterest.ktlint.ruleset.k2dart.utils.isDartNode
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
@@ -114,14 +113,21 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
                 extractedParams.add(nextPar)
             }
         }
-        //now check if we have a class body, and if not create it
-        var classBodyNode=node.nextSibling{it iz ElementType.CLASS_BODY}
+        //now check if we have a class body
+        //we should always have one thanks to the MissingClassBodyRule
+        val classBodyNode=node.nextSibling{it iz ElementType.CLASS_BODY} ?:return
+        /**
+         *  the following code has been commented out because now we have ad-hoc rule to generate an empty class body
+         *  if it is missing: see [MissingClassBodyRule]
+         */
+        /*
         if(classBodyNode==null)
         {
             classBodyNode=createEmptyClassBodyNode()
             val crAfterPrimaryConstructorNode =node.treeParent.addNewlineAfter(node)
-            node.treeParent.addChildAfter(crAfterPrimaryConstructorNode, classBodyNode)
+            node.treeParent.addChildAfter(classBodyNode, crAfterPrimaryConstructorNode)
         }
+         */
         val callBodyNodeFirstChildInside=classBodyNode.firstChildNode.treeNext //skip lbrace //
 
         //now move parameter declarations inside class body
@@ -129,7 +135,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         for(p in extractedParams)
         {
             val fieldDeclarationNode=fieldDeclFromConstructorParameter(p) ?:continue
-            prev=classBodyNode.addChildAfter(prev, fieldDeclarationNode)
+            prev=classBodyNode.addChildAfter(fieldDeclarationNode, prev)
         }
         val className=node.getEnclosingClassName()
         //now write hire the constructor with this.a parameters
@@ -142,7 +148,7 @@ public class ClassPrimaryConstructorRule : Rule("$k2dartRulesetId:$ruleName") {
         dartConstructorStr +=");"
         val darConstructorNode=LeafPsiElement(ElementType.DART_CODE,dartConstructorStr)
         prev= classBodyNode.addNewlineAfter(prev)
-        prev=classBodyNode.addChildAfter(prev, darConstructorNode)
+        prev=classBodyNode.addChildAfter(darConstructorNode, prev)
         prev= classBodyNode.addNewlineAfter(prev)
 
         //finally convert the primary constructor code to a comment in case that we did not transpile it

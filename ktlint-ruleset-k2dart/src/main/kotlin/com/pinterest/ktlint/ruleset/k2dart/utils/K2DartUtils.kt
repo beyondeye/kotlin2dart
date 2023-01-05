@@ -28,7 +28,7 @@ internal fun ASTNode.asDartNode():ASTNode {
  * This method is for adding a child AFTER another node
  * return the added node
  */
-internal fun ASTNode.addChildAfter(addAfterNode: ASTNode?, nodeToAdd: ASTNode): ASTNode {
+internal fun ASTNode.addChildAfter(nodeToAdd: ASTNode, addAfterNode: ASTNode?): ASTNode {
     val nextNode =
         if (addAfterNode == null) { //add as first child node
             firstChildNode.treeNext
@@ -44,7 +44,7 @@ internal fun ASTNode.addChildAfter(addAfterNode: ASTNode?, nodeToAdd: ASTNode): 
  * same as [addChildAfter] for adding a newLine node
  */
 internal fun ASTNode.addNewlineAfter(addAfterNode:ASTNode?):ASTNode=
-    addChildAfter(addAfterNode, PsiWhiteSpaceImpl("\n"))
+    addChildAfter(PsiWhiteSpaceImpl("\n"), addAfterNode)
 
 /**
  * check if this is of the specified [elementType], if this not the case
@@ -125,8 +125,12 @@ internal  fun createDartCodeNode(dartCode:String) :ASTNode {
  */
 internal fun createEmptyClassBodyNode() : ASTNode {
     val classBodyNode = CompositeElement(ElementType.CLASS_BODY)
-    classBodyNode.rawAddChildren(LeafPsiElement(ElementType.LBRACE,"{"))
-    classBodyNode.rawAddChildren(PsiWhiteSpaceImpl("\n"))
-    classBodyNode.rawAddChildren(LeafPsiElement(ElementType.RBRACE,"}"))
+    with(classBodyNode) {
+        rawAddChildren(PsiWhiteSpaceImpl("\n"))
+        rawAddChildren(LeafPsiElement(ElementType.LBRACE,"{"))
+        rawAddChildren(PsiWhiteSpaceImpl("\n"))
+        rawAddChildren(LeafPsiElement(ElementType.RBRACE,"}"))
+        rawAddChildren(PsiWhiteSpaceImpl("\n"))
+    }
     return  classBodyNode
 }

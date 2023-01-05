@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class MissingClassBodyRuleTest {
     @Test
-    fun `change val keyword to final keyword`() {
+    fun `create an empty class body if missing`() {
         val code =
             """
             class A
@@ -24,10 +24,19 @@ class MissingClassBodyRuleTest {
         val formattedCode =
             """
             class A
+            {
+            }
+
 
             class B(val a:Int,var b:Int)
+            {
+            }
+
 
             data class C(var a:Int,val b:String)
+            {
+            }
+
 
             class C
             {
