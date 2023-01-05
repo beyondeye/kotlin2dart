@@ -48,6 +48,10 @@ public class K2DartRuleSetProvider :
              */
             RuleProvider( 2) { VisibilityModifiersRule() },
             /**
+             * this rule should be run before [ClassPrimaryConstructorRule]
+             */
+            RuleProvider (2){ DataClassesRule() },
+            /**
              * this rule should run before VariableTypeBeforeNameRule so we assign to it higher priority
              */
             RuleProvider(1) { ClassPrimaryConstructorRule() },
@@ -66,6 +70,5 @@ public class K2DartRuleSetProvider :
             RuleProvider { NullOpsRule() },
             RuleProvider { IsEmptyRule() },
             RuleProvider { MathOpsRule() },
-            RuleProvider { DataClassesRule() },
         )
 }
