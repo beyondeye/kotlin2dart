@@ -10,7 +10,7 @@ class MissingClassBodyRuleTest {
     fun `create an empty class body if missing`() {
         val code =
             """
-            class A
+            class A;
 
             class B(val a:Int,var b:Int)
 

@@ -1,4 +1,7 @@
-class SomeClass;
+class SomeClass
+{
+}
+
 class SomeOtherClass/* (val a:double, val b:String) */
 {
 final double a;
@@ -6,6 +9,7 @@ final String b;
 
 SomeOtherClass(this.a,this.b,);
 }
+
 
 void main(double arg1, double arg2,AClass arg3) {
     double; a
