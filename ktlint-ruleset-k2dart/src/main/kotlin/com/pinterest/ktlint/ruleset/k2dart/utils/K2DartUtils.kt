@@ -153,6 +153,27 @@ internal fun parseValueParameters(node:ASTNode): MutableList<ASTNode>? {
     return extractedParams
 }
 
+
+//             ~.psi.KtParameter (VALUE_PARAMETER)
+//               ~.c.i.p.impl.source.tree.LeafPsiElement (VAR_KEYWORD) "var"
+//               ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
+//               ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "d"
+//               ~.c.i.p.impl.source.tree.LeafPsiElement (COLON) ":"
+//               ~.psi.KtTypeReference (TYPE_REFERENCE)
+//                 ~.psi.KtUserType (USER_TYPE)
+//                   ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
+//                     ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Double"
+/**
+ * input is a list of [ASTNode] object as obtained with method [parseValueParameters]
+ * output is the list of field names (arguments that are marked as "var" or "val"
+ */
+internal fun extractFieldNamesFromValueParameters(valueParameters:List<ASTNode>?):List<String>? {
+    val fieldNames=valueParameters?.mapNotNull {
+        if(it.findChildByType(valvarTokenSet)!=null) it.findChildByType(ElementType.IDENTIFIER)?.text else null
+    }
+    return fieldNames
+}
+
 internal fun findFirstChildInsideClassBody(classBodyNode:ASTNode): ASTNode? {
     var classBodyNodeFirstChildInside=classBodyNode.findChildByType(ElementType.LBRACE)?.treeNext //skip lbrace
     if(classBodyNodeFirstChildInside iz ElementType.RBRACE) { //empty body: add a new line

@@ -12,7 +12,7 @@ B(this.a,this.b,);
 }
 
 
-data class C/* (var a:int,val b:String) */
+/* data */ class C/* (var a:int,val b:String) */
 {
 int a;
 final String b;
