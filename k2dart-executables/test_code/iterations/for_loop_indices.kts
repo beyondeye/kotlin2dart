@@ -1,5 +1,7 @@
 fun main()
 {
+    for(i in 0 .. 3) println(i)
+
     val i=-1
     println(i) //-1
     for(i in 0..3) { // 0 1 2 3
@@ -19,7 +21,6 @@ fun main()
     for(i in (2*loop_start+1)..(2*loop_end+2)) { // 0 1 2 3
         println(i)
     }
-
 
     for(i:Int in 0 until 3) { // 0 1 2
         println(i)
