@@ -5,7 +5,21 @@ fun main()
     for(i in 0..3) { // 0 1 2 3
         println(i)
     }
-    println(i) //-1
+
+    val loop_start=0
+    val loop_end=3
+    for(i in loop_start..loop_end) { // 0 1 2 3
+        println(i)
+    }
+
+    for(i in loop_start+1..loop_end+2) { // 0 1 2 3
+        println(i)
+    }
+
+    for(i in (2*loop_start+1)..(2*loop_end+2)) { // 0 1 2 3
+        println(i)
+    }
+
 
     for(i:Int in 0 until 3) { // 0 1 2
         println(i)
