@@ -14,11 +14,11 @@ fun main()
         println(i)
     }
 
-    for(i in loop_start+1..loop_end+2) { // 0 1 2 3
+    for(i in loop_start+1..loop_end+2) {
         println(i)
     }
 
-    for(i in (2*loop_start+1)..(2*loop_end+2)) { // 0 1 2 3
+    for(i in (2*loop_start+1)..(2*loop_end+2)) {
         println(i)
     }
 
