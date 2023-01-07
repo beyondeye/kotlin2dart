@@ -71,5 +71,6 @@ public class K2DartRuleSetProvider :
             RuleProvider { IsEmptyRule() },
             RuleProvider { MathOpsRule() },
             RuleProvider { ForLoopIndicesRule() },
+            RuleProvider { GetterAndSetterRule() },
         )
 }
