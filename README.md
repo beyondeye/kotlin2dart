@@ -12,8 +12,8 @@ For porting code that relies on kotlin standard libraries and collections, we re
 the [kt_dart package](https://pub.dev/packages/kt_dart), in other words, ``kt.dart`` will be a required dependency of
 the translated code.
 
-## Example of transpiled code
-
+## Examples of transpiled code
+See the [test_code directory](./k2dart-executables/test_code). 
 
 ## Building the k2dart executable jar file.
 First clone this repository.
