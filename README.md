@@ -6,7 +6,7 @@ It was not designed to be a complete transpiler, but instead to facilitate manua
 The output Dart code is most cases will not be actual valid Dart code. The purpose is instead to make it easier and faster
 for a programmer to complete the job of porting the code.
 
-For a guide on how different language construct compares in the two languages, see [kotlin is dart](https://beyondeye.github.io/kotlin_is_dart/).
+For a guide on how different language constructs compares in the two languages, see [kotlin is dart](https://beyondeye.github.io/kotlin_is_dart/).
 
 For porting code that relies on kotlin standard libraries and collections, we rely on
 the [kt_dart package](https://pub.dev/packages/kt_dart), in other words, ``kt.dart`` will be a required dependency of
