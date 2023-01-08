@@ -13,6 +13,6 @@ class MyClass : MyInterface {
     }
      @override
 
-     final int zero 
-        get() = 0;
+     final int get zero 
+         => 0
 }
