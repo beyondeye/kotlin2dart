@@ -52,13 +52,17 @@ public class K2DartRuleSetProvider :
              */
             RuleProvider (2){ DataClassesRule() },
             /**
-             * this rule should run before VariableTypeBeforeNameRule so we assign to it higher priority
+             * this rule should run before [VariableTypeBeforeNameRule] so we assign to it higher priority
              */
             RuleProvider(1) { ClassPrimaryConstructorRule() },
             /**
-             * this rule should be run before FunDeclarationSyntaxRule
+             * this rule should be run before [FunDeclarationSyntaxRule]
              */
             RuleProvider(1) { FutureInsteadOfSuspendRule() },
+            /**
+             * this rule should be run before [VariableTypeBeforeNameRule]
+             */
+            RuleProvider(1) { GetterAndSetterRule() },
             RuleProvider { SemicolonAtEndOfStatementsRule() },
             RuleProvider { NumericalLiteralsRule() },
             //*dario* FinalInsteadOfValRule rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
@@ -71,6 +75,5 @@ public class K2DartRuleSetProvider :
             RuleProvider { IsEmptyRule() },
             RuleProvider { MathOpsRule() },
             RuleProvider { ForLoopIndicesRule() },
-            RuleProvider { GetterAndSetterRule() },
         )
 }
