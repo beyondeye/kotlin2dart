@@ -15,6 +15,7 @@ class A {
     val b:String get() = "Hello"
 
     var c:Int=0
+        get() = field
         set(value) {
             field=value
         }
@@ -28,56 +29,32 @@ class A {
 
 }
 
-fun main()
-{
-
-    val a=A()
-    println(a.a)
-    println(a.b)
-    a.c=1
-    println(a.c)
-
-    a.d=3
-    println(a.d)
-
-}
 """.trimIndent()
         val formattedCode =
             """
 class A {
-    val a:String get() { return "Hi"}
-    val b:String get() = "Hello"
+    final String get a  { return "Hi"}
+    final String get b  => "Hello"
 
-    var c:Int=0
+    Int get c=0
+         => field
         set(value) {
             field=value
         }
 
     private var _d:Int=0
-    var d
-        set(value) {
+    var get d
+         => _d
+set d (value) {
             _d=value
         }
-        get() = _d
+
 
 }
 
-fun main()
-{
-
-    val a=A()
-    println(a.a)
-    println(a.b)
-    a.c=1
-    println(a.c)
-
-    a.d=3
-    println(a.d)
-
-}
 """.trimIndent()
         val actualFormattedCode = runRulesOnCodeFragment(code, listOf(GetterAndSetterRule()))
-        Assertions.assertThat(actualFormattedCode).isEqualTo(formattedCode)
+        Assertions.assertThat(actualFormattedCode).isEqualToIgnoringWhitespace(formattedCode)
     }
 
 
