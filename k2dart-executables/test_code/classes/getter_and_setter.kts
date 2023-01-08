@@ -3,6 +3,7 @@ class A {
     val b:String get() = "Hello"
 
     var c:Int=0
+        get() = field
         set(value) {
             field=value
         }
@@ -15,6 +16,8 @@ class A {
         get() = _d
 
 }
+
+
 
 fun main()
 {
