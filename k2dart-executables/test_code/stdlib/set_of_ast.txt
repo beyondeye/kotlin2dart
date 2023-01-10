@@ -1,4 +1,4 @@
-09:55:21.601 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\stdlib\list_of.kts
+10:10:38.174 [main] DEBUG com.pinterest.ktlint.internal.PrintASTSubCommand - Analyzing C:\startup\WORK\sel_app\TOOLS\K2DART\kotlin2dart\k2dart-executables\.\test_code\stdlib\set_of.kts
  1: ~.psi.KtFile (FILE)
  1:   ~.psi.KtPackageDirective (PACKAGE_DIRECTIVE) ""
  1:   ~.psi.KtImportList (IMPORT_LIST) ""
@@ -53,7 +53,7 @@
  3:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  3:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  3:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 3:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "listOf"
+ 3:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "setOf"
  3:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
  3:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
  3:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
@@ -86,7 +86,7 @@
  4:             ~.psi.KtTypeReference (TYPE_REFERENCE)
  4:               ~.psi.KtUserType (USER_TYPE)
  4:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 4:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "List"
+ 4:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "Set"
  4:                 ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
  4:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
  4:                   ~.psi.KtTypeProjection (TYPE_PROJECTION)
@@ -100,7 +100,7 @@
  4:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  4:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  4:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 4:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "listOf"
+ 4:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "setOf"
  4:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
  4:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
  4:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
@@ -128,7 +128,7 @@
  5:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  5:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  5:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 5:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "listOf"
+ 5:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "setOf"
  5:               ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
  5:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
  5:                 ~.psi.KtTypeProjection (TYPE_PROJECTION)
@@ -161,7 +161,7 @@
  6:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  6:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  6:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "listOf"
+ 6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "setOf"
  6:               ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
  6:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
  6:                 ~.psi.KtTypeProjection (TYPE_PROJECTION)
@@ -245,7 +245,7 @@
  7:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  7:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  7:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableListOf"
+ 7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableSetOf"
  7:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
  7:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
  7:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
@@ -278,7 +278,7 @@
  8:             ~.psi.KtTypeReference (TYPE_REFERENCE)
  8:               ~.psi.KtUserType (USER_TYPE)
  8:                 ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "MutableList"
+ 8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "MutableSet"
  8:                 ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
  8:                   ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
  8:                   ~.psi.KtTypeProjection (TYPE_PROJECTION)
@@ -292,7 +292,7 @@
  8:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  8:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  8:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableListOf"
+ 8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableSetOf"
  8:               ~.psi.KtValueArgumentList (VALUE_ARGUMENT_LIST)
  8:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LPAR) "("
  8:                 ~.psi.KtValueArgument (VALUE_ARGUMENT)
@@ -320,7 +320,7 @@
  9:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
  9:             ~.psi.KtCallExpression (CALL_EXPRESSION)
  9:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
- 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableListOf"
+ 9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableSetOf"
  9:               ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
  9:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
  9:                 ~.psi.KtTypeProjection (TYPE_PROJECTION)
@@ -353,7 +353,7 @@
 10:             ~.c.i.p.impl.source.tree.PsiWhiteSpaceImpl (WHITE_SPACE) " "
 10:             ~.psi.KtCallExpression (CALL_EXPRESSION)
 10:               ~.psi.KtNameReferenceExpression (REFERENCE_EXPRESSION)
-10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableListOf"
+10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (IDENTIFIER) "mutableSetOf"
 10:               ~.psi.KtTypeArgumentList (TYPE_ARGUMENT_LIST)
 10:                 ~.c.i.p.impl.source.tree.LeafPsiElement (LT) "<"
 10:                 ~.psi.KtTypeProjection (TYPE_PROJECTION)

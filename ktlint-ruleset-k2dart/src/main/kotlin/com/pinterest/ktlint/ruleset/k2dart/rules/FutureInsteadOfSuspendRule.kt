@@ -12,8 +12,6 @@ import com.pinterest.ktlint.ruleset.k2dart.utils.createSimpleTypeNode
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 
-// FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
-// but we keep it here because we use it as template for generating new rules
 public class FutureInsteadOfSuspendRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="future-instead-of-suspend"

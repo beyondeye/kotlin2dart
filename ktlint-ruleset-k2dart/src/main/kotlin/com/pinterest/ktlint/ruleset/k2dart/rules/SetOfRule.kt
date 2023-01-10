@@ -9,9 +9,9 @@ import com.pinterest.ktlint.core.ast.iz
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafElement
 
-public class ListOfRule : Rule("$k2dartRulesetId:$ruleName") {
+public class SetOfRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
-        public const val ruleName:String="list-of"
+        public const val ruleName:String="set-of"
     }
     override fun beforeVisitChildNodes(
         node: ASTNode,

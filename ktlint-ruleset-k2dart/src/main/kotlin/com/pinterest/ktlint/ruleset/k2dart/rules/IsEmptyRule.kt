@@ -9,8 +9,6 @@ import com.pinterest.ktlint.core.ast.izNot
 import com.pinterest.ktlint.core.ast.nextCodeSibling
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 
-// FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
-// but we keep it here because we use it as template for generating new rules
 public class IsEmptyRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="is-empty"

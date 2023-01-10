@@ -9,8 +9,6 @@ import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.CompositeElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiWhiteSpaceImpl
 
-// FinalInsteadOfValRule this rule is obsolete, since it has been integrated in VariableTypeBeforeNameRule
-// but we keep it here because we use it as template for generating new rules
 public class CompanionObjectRule : Rule("$k2dartRulesetId:$ruleName") {
     public companion object {
         public const val ruleName:String="companion-object"

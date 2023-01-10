@@ -3,7 +3,6 @@ package com.beyondeye.k2dart
 import com.pinterest.ktlint.ruleset.k2dart.rules.CompanionObjectRule
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-// *DARIO* this for collecting result of a lint of operation
 
 class CompanionObjectRuleTest {
     @Test
